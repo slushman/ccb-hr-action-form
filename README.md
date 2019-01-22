@@ -1,68 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TODO
 
-## Available Scripts
+Finish tests for Textarea.
+Setup API for getting associates from The Village.
+Setup API for sending form info to The Village DB.
+Setup API for sending responses to The Village DB.
+Setup Redux for auth.
+Setup Redux for saving selected associate?
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+# Slack API Info
+You must entity-encode these characters:
+& becomes &amp;
+< becomes &lt;
+> becomes &gt;
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+URLs must be encoded as well. 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Buttons in message:
+* Approve: timestamps the person's response on the request and triggers the next step(s).
+* Deny: timestamps the person's response on the request and sends a notification back to the original requester.
+* Ask Question: opens a message to the original requester in Slack.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Process:
+LT member goes to The Village and fills out the AA Form.
+Sonda receives a Slack notification on submission.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If she approves, The Village app receives a response and sets a timestamp with her name/account on the form.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Then either Joe & HR Manager receive a Slack notification.
+or
+The other leadership team membership receive Slack notifications.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+When LT member(s) approve, then Don receives a Slack notification.
 
-## Learn More
+When Don approves, the originator is notified of a successful request.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If at any point someone denies a request, the timestamp is created and the originator is notified an all processesz stop.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Optionally, any person in the process has the option to ask a question. This creates a direct message to a person in the chain (which is selectable). The process is paused until they either approve or deny the request.
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+# API
+## POST
+A response endpoint for recording the responses from Slack. Adds the following the form's DB: response code (0 or 1), timestamp, and person's ID.
 
-### Analyzing the Bundle Size
+If the response = 1, the next action is triggered and the originator is notified.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+If the response = 0, the originator is notified.
 
-### Making a Progressive Web App
+## GET
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Send message to user on Slack.
+  Params:
+    userId
+    authorName
+    contentText
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `npm run build` fails to minify
+# Slack API Info
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Users
+
+const user = GET https://slack.com/api/users.profile.get
+
+For mapping to the messages:
+
+author_icon = user.profile.image_original
+author_name = user.profile.real_name
+author_link = "https://ccbchurch.slack.com/team/" + user.profile.team
+
+UEG3PHN5P
