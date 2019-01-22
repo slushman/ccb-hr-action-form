@@ -1,0 +1,40 @@
+{
+  "attachments": [
+    {
+      "actions": [
+        {
+          "text": "Approve",
+          "type": "button",
+          "url": "https://village.ccbchurch.com/api/v1/aaf?response=1&userId=1234&formId=1234"
+        },
+        {
+          "text": "Deny",
+          "type": "button",
+          "url": "https://village.ccbchurch.com/api/v1/aaf?response=0&userId=1234&formId=1234"
+        }
+      ],
+      "attachment_type": "default",
+      "author_name": "Aaron Senneff",
+      "author_link": "https://ccbchurch.slack.com/team/UE51HN4F2",
+      "callback_id": "associate_action_response",
+      "color": "good",
+      "fallback": "Respond to this Associate Action Form at https://village.ccbchurch.com/aaf/1234/respond",
+      "fields": [
+        {
+          "short": true,
+          "title": "Request Type",
+          "value": "Leave"
+        },
+        {
+          "short": true,
+          "title": "Leave Type",
+          "value": "Disability"
+        }
+      ],
+      "footer": "CCB Associate Action Request",
+      "text": "Luke Skywalker requests disability leave due to loosing a hand.",
+      "title": "Associate Action Request #1234: Disability leave for Luke",
+      "title_link": "https://village.ccbchurch.com/aaf/1234/respond"
+    }
+  ]
+}
