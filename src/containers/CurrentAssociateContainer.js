@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Select } from '../components/Select';
+import { Select } from '../components/Fields/Select';
 
 /**
  * Associate selector appears if:

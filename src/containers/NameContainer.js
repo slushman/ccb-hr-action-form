@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Select } from '../components/Select';
+import { Select } from '../components/Fields/Select';
 
 export class NameContainer extends Component {
 
