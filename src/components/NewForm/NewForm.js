@@ -27,6 +27,10 @@ const StyledForm = styled(Form)`
   width: 100%;
 `;
 
+/**
+ * Unique ID generated in constructor so each page load generates a new one.
+ * https://stackoverflow.com/questions/29420835/how-to-generate-unique-ids-for-form-labels-in-react
+ */
 class NewForm extends Component {
 
   constructor(props) {
