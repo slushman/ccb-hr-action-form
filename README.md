@@ -1,13 +1,25 @@
+# Teach learned/practiced in this project:
+* React
+* React Context API
+* Firebase
+* Material UI
+* Formik
+* Yup
+* Jest & Enzyme
+* Axios
+* Moment.js
+* Styled Components
+
+
 # TODO
 
-Finish tests for Textarea.
-Setup API for getting associates from The Village.
-Setup API for sending form info to The Village DB.
-Setup API for sending responses to The Village DB.
-Setup Redux for auth.
-Setup Redux for saving selected associate?
-
-
+* Setup Firebase DB API
+* Send login info to Firebase DB
+* Send form submissions to Firebase DB
+* Get form info for each user from Firebase DB and display on Your Forms page.
+* Send notification on form submission to Slack.
+* Get response from Slack, save to Firebase DB.
+* Send second notification to Slack based on first Slack response.
 
 
 
@@ -24,7 +36,6 @@ URLs must be encoded as well.
 Buttons in message:
 * Approve: timestamps the person's response on the request and triggers the next step(s).
 * Deny: timestamps the person's response on the request and sends a notification back to the original requester.
-* Ask Question: opens a message to the original requester in Slack.
 
 
 

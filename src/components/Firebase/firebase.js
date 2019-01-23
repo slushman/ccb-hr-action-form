@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,6 +16,7 @@ export class Firebase {
     app.initializeApp(config);
 
     this.auth = app.auth();
+    this.db = app.firestore();
     
     this.googleProvider = new app.auth.GoogleAuthProvider();
   }
@@ -26,4 +28,8 @@ export class Firebase {
   doSignOut = () => {
     return this.auth.signOut();
   }
+
+  user = uid => this.db.ref(`users/${uid}`);
+
+  users = () => this.db.ref('users');
 }
