@@ -18,13 +18,10 @@ class YourFormsContainer extends Component {
   getForms = async () => {
     let formsArray = [];
 
-    //this.props.firebasedb.collection('forms').get()
-
-    // use this.props.authUser.uid to fetch the current user's forms.
-
     const formsRef = await this.props.firebase.db.collection('forms');
+    const currentUserId = this.props.authUser.uid;
     try {
-      const allFormsSnapshot = await formsRef.get();
+      const allFormsSnapshot = await formsRef.where('submitterId', '==', currentUserId).get();
       allFormsSnapshot.forEach( form => {
         const formData = form.data();
         formData.formId = form.id;
