@@ -24,7 +24,7 @@ export class TransferPromotionFields extends Component {
           <Legend>Previous Role</Legend>
           <Input
             label="Previous Role Name"
-            name="roleNamePrevious"
+            name="namePreviousRole"
             {...this.props}
           />
           <Input
@@ -57,7 +57,7 @@ export class TransferPromotionFields extends Component {
           <Legend>New Role</Legend>
           <Input
             label="New Role Name"
-            name="roleNameNew"
+            name="nameNewRole"
             {...this.props}
           />
           <Input
