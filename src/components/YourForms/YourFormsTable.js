@@ -80,7 +80,6 @@ export class YourFormsTable extends Component {
   }
 
   render() {
-    console.log(this.props.forms);
     const { page, rows, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (
@@ -99,7 +98,6 @@ export class YourFormsTable extends Component {
               <TableBody>
                 {
                   rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => {
-                    //const requestType = R.find(R.propEq('fieldName', 'Request Type'))(row.fields);
                     return (
                     <StyledTableRow key={ i }>
                       <TableCell>

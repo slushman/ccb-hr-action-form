@@ -50,7 +50,6 @@ class YourFormsContainer extends Component {
     if ( 1 > this.state.forms.length ) {
       return null;
     }
-    console.log(this.state);
     return (
       <YourFormsTable
         forms={ this.state.forms }
