@@ -18,7 +18,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { Typography } from '@material-ui/core';
 
 const theme = createMuiTheme({
   typography: {
