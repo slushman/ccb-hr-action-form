@@ -12,14 +12,9 @@
 
 
 # TODO
-
-* Setup Firebase DB API
-* Send login info to Firebase DB
-* Send form submissions to Firebase DB
-* Get form info for each user from Firebase DB and display on Your Forms page.
 * Send notification on form submission to Slack.
 * Get response from Slack, save to Firebase DB.
-* Send second notification to Slack based on first Slack response.
+* Send additional notifications to Slack based on previous Slack responses.
 
 
 

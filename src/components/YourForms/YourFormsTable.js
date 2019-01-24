@@ -5,7 +5,6 @@ import moment from 'moment';
 import {
   Link, 
 } from 'react-router-dom';
-import * as R from 'ramda';
 
 import { TablePaginationActions } from './TablePaginationActions';
 
@@ -81,6 +80,7 @@ export class YourFormsTable extends Component {
   }
 
   render() {
+    console.log(this.props.forms);
     const { page, rows, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (
@@ -88,34 +88,18 @@ export class YourFormsTable extends Component {
         <WrappingPaper>
           <TableWrap>
             <StyledTable>
-              {/* <colgroup>
-                <col />
-              </colgroup>
-              <colgroup>
-                <col />
-              </colgroup>
-              <colgroup span="3"></colgroup> */}
               <StyledTableHead>
-                {/* <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <HeaderCell align="center" component="th" scope="colgroup" colSpan={4}>Approvals</HeaderCell>
-                </TableRow> */}
                 <TableRow>
                   <HeaderCell component="th">Form Name</HeaderCell>
                   <HeaderCell align="right" component="th">Request Type</HeaderCell>
                   <HeaderCell align="right" component="th">Submission Date</HeaderCell>
-                  {/* <HeaderCell align="right" component="th" scope="col">HR</HeaderCell>
-                  <HeaderCell align="right" component="th" scope="col">Leadership</HeaderCell>
-                  <HeaderCell align="right" component="th" scope="col">CEO</HeaderCell> */}
                   <TableCell align="right">Approvals</TableCell>
                 </TableRow>
               </StyledTableHead>
               <TableBody>
                 {
                   rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => {
-                    const requestType = R.find(R.propEq('fieldName', 'Request Type'))(row.fields);
+                    //const requestType = R.find(R.propEq('fieldName', 'Request Type'))(row.fields);
                     return (
                     <StyledTableRow key={ i }>
                       <TableCell>
@@ -130,16 +114,17 @@ export class YourFormsTable extends Component {
                           }
                         </Link>
                       </TableCell>
-                      <TableCell align="right">{requestType.value}</TableCell>
-                      <TableCell align="right">{ moment( row.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                      {/* <TableCell align="right">{ moment( row.approvals.approvalHR, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                      <TableCell align="right">{ moment( row.approvals.approvalLT, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                      <TableCell align="right">{ moment( row.approvals.approvalCEO, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell> */}
+                      <TableCell align="right">{row.requestType}</TableCell>
+                      <TableCell align="right">{ moment( row.dateSubmitted, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                      {/* <TableCell align="right">{ moment( row.approvals.approvalHR, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                      <TableCell align="right">{ moment( row.approvals.approvalLT, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                      <TableCell align="right">{ moment( row.approvals.approvalCEO, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' ) }</TableCell> */}
                       <TableCell align="right">
-                        {
-                          row.approvals.map( ( approval, i ) => (
-                            <Typography component="p" key={i}>{approval.type}: {moment( approval.timestamp, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' )}</Typography>
-                          ))
+                        { /*
+                        //   row.approvals.map( ( approval, i ) => (
+                        //     <Typography component="p" key={i}>{approval.type}: {moment( approval.timestamp, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' )}</Typography>
+                        //   ))
+                        // */
                         }
                       </TableCell>
                     </StyledTableRow>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withFirebase } from '../components/Firebase';
 
-import { forms } from '../constants/testForms';
+//import { forms } from '../constants/testForms';
 import { YourFormsTable } from '../components/YourForms/YourFormsTable';
 
-export class YourFormsContainer extends Component {
+class YourFormsContainer extends Component {
   state = {
     error: false,
     forms: [],
@@ -14,11 +15,26 @@ export class YourFormsContainer extends Component {
     this.getForms();
   }
 
-  getForms = () => {
-    // const json = await axios.get('https://village.ccbchurch.com/api/church/membership_types');
-    // const forms = json.data;
+  getForms = async () => {
+    let formsArray = [];
+
+    //this.props.firebasedb.collection('forms').get()
+
+    // use this.props.authUser.uid to fetch the current user's forms.
+
+    const formsRef = await this.props.firebase.db.collection('forms');
+    try {
+      const allFormsSnapshot = await formsRef.get();
+      allFormsSnapshot.forEach( form => {
+        const formData = form.data();
+        formData.formId = form.id;
+        formsArray.push(formData);
+      })
+    } catch ( error ) {
+      console.log('Error getting documents', error);
+    }
     this.setState({
-      forms,
+      forms: formsArray,
       loading: true,
     });
     try {
@@ -37,6 +53,7 @@ export class YourFormsContainer extends Component {
     if ( 1 > this.state.forms.length ) {
       return null;
     }
+    console.log(this.state);
     return (
       <YourFormsTable
         forms={ this.state.forms }
@@ -44,3 +61,5 @@ export class YourFormsContainer extends Component {
     );
   }
 }
+
+export default withFirebase( YourFormsContainer );
