@@ -21,7 +21,7 @@ import Button from '@material-ui/core/Button';
 
 import * as ROUTES from '../constants/routes';
 import { YourFormsPage } from '../pages/YourFormsPage';
-import NewFormPage from '../pages/NewFormPage';
+import { NewFormPage } from '../pages/NewFormPage';
 import { ViewFormPage } from '../pages/ViewFormPage';
 
 const StyledNavLink = styled(NavLink)``;
@@ -79,7 +79,7 @@ class NavAuthedComp extends Component {
               <MenuItem
                 component={StyledNavLink}
                 onClick={ this.handleClose }
-                to={ ROUTES.ACCOUNT }
+                to={ ROUTES.YOUR_FORMS }
               >
                 Your Forms
               </MenuItem>
@@ -122,14 +122,14 @@ class NavAuthedComp extends Component {
             }}
             title="View HR Action Form" />
           <Route
-            path={ROUTES.ACCOUNT}
+            path={ROUTES.YOUR_FORMS}
             render={(props) => <YourFormsPage setTitle={this.setTitle} />}
             title="Your Forms" />
           <Route
             path={ROUTES.NEW_FORM}
             render={(props) => <NewFormPage setTitle={this.setTitle} />}
             title="New HR Action Form" />
-          <Redirect to={ROUTES.ACCOUNT} />
+          <Redirect to={ROUTES.YOUR_FORMS} />
         </Switch>
       </Fragment>
     );

@@ -82,7 +82,7 @@ class SignInGoogleBase extends Component {
         this.setState({
           error: null
         });
-        this.props.history.push(ROUTES.ACCOUNT);
+        this.props.history.push(ROUTES.YOUR_FORMS);
       })
       .catch( error => {
         this.setState({
