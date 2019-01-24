@@ -705,7 +705,7 @@ export const forms = [
       },
       {
         fieldName: 'Previous Role Name',
-        value: 'Cheif Advisor to the King of Rohan',
+        value: 'Chief Advisor to the King of Rohan',
       },
       {
         fieldName: 'Previous Salary',
