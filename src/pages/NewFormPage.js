@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled, { ThemeProvider } from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import moment from 'moment';
 
 import { NewForm } from '../components/NewForm/NewForm';
+import { AuthUserContext } from '../components/Session';
 
+import * as ROUTES from '../constants/routes';
 import { withFirebase } from '../components/Firebase';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -35,51 +40,8 @@ const WrappingPaper = styled(Paper)`
   padding: ${ props => props.theme.spacing.unit * 3}px;
 `;
 
-const initialFormikValues = {
-  acquisitionType: '',
-  dateBirth: '',
-  dateClosed: '',
-  dateEffective: '',
-  dateFilled: '',
-  dateHire: '',
-  dateLeaveEffective: '',
-  dateLeaveReturn: '',
-  datePosted: '',
-  dateRequested: '',
-  employmentType: '',
-  flsaClassification: '',
-  flsaClassificationNewRole: '',
-  flsaClassificationPrevious: '',
-  formId: '',
-  formName: '',
-  hiringLead: '',
-  leavePtoHours: '',
-  leaveType: '',
-  nameAssociate: '',
-  nameNewRole: '',
-  nameOriginator: '',
-  newRate: '',
-  notRehirable: '',
-  numberOfDays: '',
-  otherExplanation: '',
-  rehireEligibility: '',
-  requestType: '',
-  role: '',
-  roleNameNew: '',
-  roleNamePrevious: '',
-  salary: '',
-  salaryNew: '',
-  salaryPrevious: '',
-  status: '',
-  statusNewRole: '',
-  submitterId: '',
-  team: '',
-  teamLead: '',
-  teamLeadNew: '',
-  teamLeadPrevious: '',
-};
-
 const validationSchema = Yup.object().shape({
+  comments: Yup.string(),
   dateBirth: Yup.date().default(function(){
     return new Date();
   }),
@@ -95,9 +57,6 @@ const validationSchema = Yup.object().shape({
   dateHire: Yup.date().default(function(){
     return new Date();
   }),
-  dateLeaveEffective: Yup.date().default(function(){
-    return new Date();
-  }),
   dateLeaveReturn: Yup.date().default(function(){
     return new Date();
   }),
@@ -107,20 +66,17 @@ const validationSchema = Yup.object().shape({
   dateRequested: Yup.date().default(function(){
     return new Date();
   }),
-  formId: Yup.string(),
   formName: Yup.string(),
   hiringLead: Yup.string(),
   leavePtoHours: Yup.string(),
   nameAssociate: Yup.string(),
   nameNewRole: Yup.string(),
-  nameOriginator: Yup.string(),
   newRate: Yup.string(),
   notRehirable: Yup.string(),
   numberOfDays: Yup.number(),
   otherExplanation: Yup.string(),
   role: Yup.string(),
-  roleNameNew: Yup.string(),
-  roleNamePrevious: Yup.string(),
+  namePreviousRole: Yup.string(),
   salary: Yup.string(),
   salaryNew: Yup.string(),
   salaryPrevious: Yup.string(),
@@ -131,12 +87,7 @@ const validationSchema = Yup.object().shape({
   teamLeadPrevious: Yup.string(),
 });
 
-/**
- * UUID assigned as a initial value for formId because
- * if it was set as the value attribute on creation, it 
- * wouldn't submit with the form: https://github.com/jaredpalmer/formik/issues/1202
- */
-class NewFormPage extends Component {
+class NewFormPageComp extends Component {
 
   componentDidMount() {
     this.props.setTitle('New HR Action Form');
@@ -144,47 +95,104 @@ class NewFormPage extends Component {
 
   render() {
     console.log(this.props.firebase);
-    const { firebase } = this.props
+    const { firebase } = this.props;
+    console.log(this.props);
     return (
-      <ThemeProvider theme={theme}>
-        <Main>
-          <CssBaseline />
-          <Grid item xs={ 12 }>
-            <WrappingPaper>
-              <Formik
-                initialValues={initialFormikValues}
-                onSubmit={(values, {setSubmitting}) => {
-                  console.log(values);
-                  firebase.db.collection('forms')
-                    .add(values)
-                    .then(
-                      setTimeout(() => {
-                        alert('Form submitted!');
-                        setSubmitting(false);
-                      }, 250)
-                    )
-                    .catch( function ( error ) {
-                      console.error( 'Error adding document: ', error);
-                    })
-                  
-                  
-                }}
-                validationSchema={validationSchema}
-              >
-                {
-                  props => {
-                    return (
-                      <NewForm {...props} />
-                    );
-                  }
-                }
-              </Formik>
-            </WrappingPaper>
-          </Grid>
-        </Main>
-      </ThemeProvider>
+      <AuthUserContext.Consumer>
+        {
+          authUser => (
+            <ThemeProvider theme={theme}>
+              <Main>
+                <CssBaseline />
+                <Grid item xs={ 12 }>
+                  <WrappingPaper>
+                    <Formik
+                      initialValues={{
+                        acquisitionType: '',
+                        comments: '',
+                        dateBirth: '',
+                        dateClosed: '',
+                        dateEffective: '',
+                        dateFilled: '',
+                        dateHire: '',
+                        dateLeaveReturn: '',
+                        datePosted: '',
+                        dateRequested: '',
+                        employmentType: '',
+                        flsaClassification: '',
+                        flsaClassificationNewRole: '',
+                        flsaClassificationPrevious: '',
+                        formName: '',
+                        hiringLead: '',
+                        leavePtoHours: '',
+                        leaveType: '',
+                        nameAssociate: '',
+                        nameNewRole: '',
+                        newRate: '',
+                        notRehirable: '',
+                        numberOfDays: '',
+                        otherExplanation: '',
+                        rehireEligibility: '',
+                        requestType: '',
+                        role: '',
+                        namePreviousRole: '',
+                        salary: '',
+                        salaryNew: '',
+                        salaryPrevious: '',
+                        status: '',
+                        statusNewRole: '',
+                        submitterId: authUser.uid,
+                        team: '',
+                        teamLead: '',
+                        teamLeadNew: '',
+                        teamLeadPrevious: '',
+                      }}
+                      onSubmit={(values, {setSubmitting}) => {
+                        console.log(values);
+                        firebase.db.collection('forms')
+                          .add(
+                            {
+                              ...values,
+                              dateSubmitted: moment(new Date()).format('YYYY-MM-DDTHH:mm:ss')
+                            }
+                          )
+                          .then(() => {
+                            this.props.history.push(ROUTES.YOUR_FORMS);
+                            setTimeout(() => {
+                              alert('Form submitted!');
+                              setSubmitting(false);
+                            }, 250)
+                          })
+                          .catch( function ( error ) {
+                            console.error( 'Error adding document: ', error);
+                          })
+                        
+                        
+                      }}
+                      validationSchema={validationSchema}
+                    >
+                      {
+                        props => {
+                          return (
+                            <NewForm {...props} />
+                          );
+                        }
+                      }
+                    </Formik>
+                  </WrappingPaper>
+                </Grid>
+              </Main>
+            </ThemeProvider>
+          )
+        }
+      </AuthUserContext.Consumer>
     );
   }
 }
 
-export default withFirebase( NewFormPage );
+const NewFormPage = compose(
+  withRouter,
+  withFirebase,
+)( NewFormPageComp );
+
+export { NewFormPage, NewFormPageComp };
