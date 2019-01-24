@@ -94,9 +94,7 @@ class NewFormPageComp extends Component {
   }
 
   render() {
-    console.log(this.props.firebase);
     const { firebase } = this.props;
-    console.log(this.props);
     return (
       <AuthUserContext.Consumer>
         {
@@ -148,7 +146,6 @@ class NewFormPageComp extends Component {
                         teamLeadPrevious: '',
                       }}
                       onSubmit={(values, {setSubmitting}) => {
-                        console.log(values);
                         firebase.db.collection('forms')
                           .add(
                             {
