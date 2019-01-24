@@ -3,7 +3,6 @@ import { FastField, Form } from 'formik';
 import styled from 'styled-components';
 import uuidv4 from 'uuid/v4';
 
-import { AuthUserContext } from '../Session';
 import { RequestType } from '../FieldGroups/RequestType';
 import { NewHireFields } from '../FieldGroups/NewHireFields';
 import { EmploymentType } from '../FieldGroups/EmploymentType';
@@ -42,98 +41,86 @@ class NewForm extends Component {
   render() {
     const { values } = this.props;
     return (
-      <AuthUserContext.Consumer>
-      {
-        authUser => (
-          <StyledForm>
-            <Heading1>HR Action Form</Heading1>
-            <FastField
-              name="formId"
-              type="hidden"
-              value={this.uuid}
-            />
-            <FastField
-              name="submitterId"
-              type="hidden"
-              value={authUser.uid}
-            />
-            <FormName {...this.props} />
-            <RequestType {...this.props} />
-            {
-              'employment' === values.requestType &&
-                <EmploymentType {...this.props} />
-            }
-            {
-              'employment' === values.requestType &&
-              'new-hire' === values.employmentType &&
-                <NewHireFields {...this.props} />
-            }
-            {
-              'employment' === values.requestType && 
-              ( 'rehire' === values.employmentType ||
-                'resignation' === values.employmentType ||
-                'termination' === values.employmentType
-              ) &&
-                <AssociateName {...this.props} />
-            }
-            {
-              'employment' === values.requestType &&
-              'rehire' === values.employmentType &&
-                <div style={{marginBottom: '1.5em'}}>What fields should appear here?</div>
-            }
-            {
-              'employment' === values.requestType &&
-              ( 'resignation' === values.employmentType ||
-                'termination' === values.employmentType ) &&
-                <ResignationTerminationFields {...this.props} values={values} />
-            }
-            {
-              'talent-acquisition' === values.requestType &&
-                <AcquisitionType {...this.props} />
-            }
-            {
-              'talent-acquisition' === values.requestType &&
-              'new-position' === values.acquisitionType &&
-                <NewPositionFields {...this.props} values={values} />
-            }
-            {
-              'talent-acquisition' === values.requestType &&
-              'fill-position' === values.acquisitionType &&
-                <div style={{marginBottom: '1.5em'}}>What fields should appear here?</div>
-            }
-            {
-              'add-role' === values.requestType &&
-                <AddRoleFields {...this.props} values={values} />
-            }
-            {
-              'role-change' === values.requestType &&
-                <RoleChangeFields {...this.props} values={values} />
-            }
-            {
-              'transfer-promotion' === values.requestType &&
-                <TransferPromotionFields {...this.props} values={values} />
-            }
-            {
-              'leave' === values.requestType &&
-                <LeaveFields {...this.props} values={values} />
-            }
-            {
-              ( 'employment' === values.requestType || 'leave' === values.requestType || 'role-change' === values.requestType || 'transfer-promotion' === values.requestType ) &&
-                <EffectiveDate {...this.props} />
-            }
-            {
-              '' !== values.requestType &&
-                <Comments {...this.props} />
-            }
-            <Button
-              color="primary"
-              type="submit"
-              variant="contained"
-            >Submit</Button>
-          </StyledForm>
-        )}
-      }
-      </AuthUserContext.Consumer>
+      <StyledForm>
+        <Heading1>HR Action Form</Heading1>
+        <FastField
+          name="submitterId"
+          type="hidden"
+        />
+        <FormName {...this.props} />
+        <RequestType {...this.props} />
+        {
+          'employment' === values.requestType &&
+            <EmploymentType {...this.props} />
+        }
+        {
+          'employment' === values.requestType &&
+          'new-hire' === values.employmentType &&
+            <NewHireFields {...this.props} />
+        }
+        {
+          'employment' === values.requestType && 
+          ( 'rehire' === values.employmentType ||
+            'resignation' === values.employmentType ||
+            'termination' === values.employmentType
+          ) &&
+            <AssociateName {...this.props} />
+        }
+        {
+          'employment' === values.requestType &&
+          'rehire' === values.employmentType &&
+            <div style={{marginBottom: '1.5em'}}>What fields should appear here?</div>
+        }
+        {
+          'employment' === values.requestType &&
+          ( 'resignation' === values.employmentType ||
+            'termination' === values.employmentType ) &&
+            <ResignationTerminationFields {...this.props} values={values} />
+        }
+        {
+          'talent-acquisition' === values.requestType &&
+            <AcquisitionType {...this.props} />
+        }
+        {
+          'talent-acquisition' === values.requestType &&
+          'new-position' === values.acquisitionType &&
+            <NewPositionFields {...this.props} values={values} />
+        }
+        {
+          'talent-acquisition' === values.requestType &&
+          'fill-position' === values.acquisitionType &&
+            <div style={{marginBottom: '1.5em'}}>What fields should appear here?</div>
+        }
+        {
+          'add-role' === values.requestType &&
+            <AddRoleFields {...this.props} values={values} />
+        }
+        {
+          'role-change' === values.requestType &&
+            <RoleChangeFields {...this.props} values={values} />
+        }
+        {
+          'transfer-promotion' === values.requestType &&
+            <TransferPromotionFields {...this.props} values={values} />
+        }
+        {
+          'leave' === values.requestType &&
+            <LeaveFields {...this.props} values={values} />
+        }
+        {
+          ( 'employment' === values.requestType || 'leave' === values.requestType || 'role-change' === values.requestType || 'transfer-promotion' === values.requestType ) &&
+            <EffectiveDate {...this.props} />
+        }
+        {
+          '' !== values.requestType &&
+            <Comments {...this.props} />
+        }
+        <Button
+          color="primary"
+          type="submit"
+          variant="contained"
+        >Submit</Button>
+      </StyledForm>
     );
   }
 }
