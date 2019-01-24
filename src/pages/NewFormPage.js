@@ -72,6 +72,7 @@ const initialFormikValues = {
   salaryPrevious: '',
   status: '',
   statusNewRole: '',
+  submitterId: '',
   team: '',
   teamLead: '',
   teamLeadNew: '',
@@ -123,6 +124,7 @@ const validationSchema = Yup.object().shape({
   salary: Yup.string(),
   salaryNew: Yup.string(),
   salaryPrevious: Yup.string(),
+  submitterId: Yup.string(),
   team: Yup.string(),
   teamLead: Yup.string(),
   teamLeadNew: Yup.string(),
@@ -141,6 +143,8 @@ class NewFormPage extends Component {
   }
 
   render() {
+    console.log(this.props.firebase);
+    const { firebase } = this.props
     return (
       <ThemeProvider theme={theme}>
         <Main>
@@ -151,11 +155,19 @@ class NewFormPage extends Component {
                 initialValues={initialFormikValues}
                 onSubmit={(values, {setSubmitting}) => {
                   console.log(values);
+                  firebase.db.collection('forms')
+                    .add(values)
+                    .then(
+                      setTimeout(() => {
+                        alert('Form submitted!');
+                        setSubmitting(false);
+                      }, 250)
+                    )
+                    .catch( function ( error ) {
+                      console.error( 'Error adding document: ', error);
+                    })
                   
-                  setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                  }, 500);
+                  
                 }}
                 validationSchema={validationSchema}
               >
