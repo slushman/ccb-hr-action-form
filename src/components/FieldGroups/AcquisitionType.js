@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Select } from '../Fields/Select';
+import Select from '../Fields/Select';
 
 /**
  * Field appears if:
  * requestType is talent-acquisition
  */
-export class AcquisitionType extends Component {
+class AcquisitionType extends Component {
   render() {
     return (
       <Select
@@ -26,3 +26,5 @@ export class AcquisitionType extends Component {
     );
   }
 }
+
+export default AcquisitionType;

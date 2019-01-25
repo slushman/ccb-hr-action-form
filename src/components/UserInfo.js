@@ -5,14 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
-export default class UserInfo extends Component {
+class UserInfo extends Component {
 	
   static propTypes = {
 	userInfo: PropTypes.object.isRequired,
   }
 
   render() {
-	  console.log(this.props.userInfo);
 	const { userInfo } = this.props;
 	return (
 		<Grid
@@ -38,3 +37,4 @@ export default class UserInfo extends Component {
   }
 }
 
+export default UserInfo;

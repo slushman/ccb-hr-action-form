@@ -26,7 +26,7 @@ const InputElement = styled(FastField)`
 `;
 InputElement.displayName = 'InputElement';
 
-export class Input extends Component {
+class Input extends Component {
   static propTypes = {
     className: PropTypes.string,
     id: PropTypes.string,

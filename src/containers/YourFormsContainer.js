@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withFirebase } from '../components/Firebase';
 
 //import { forms } from '../constants/testForms';
-import { YourFormsTable } from '../components/YourForms/YourFormsTable';
+import YourFormsTable from '../components/YourForms/YourFormsTable';
 
 class YourFormsContainer extends Component {
   state = {

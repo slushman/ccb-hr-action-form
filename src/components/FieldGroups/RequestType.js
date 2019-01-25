@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Select } from '../Fields/Select';
+import Select from '../Fields/Select';
 
-export class RequestType extends Component {
+class RequestType extends Component {
   render() {
     return (
       <Select
@@ -38,3 +38,5 @@ export class RequestType extends Component {
     );
   }
 }
+
+export default RequestType;

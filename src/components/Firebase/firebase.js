@@ -11,7 +11,7 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-export class Firebase {
+class Firebase {
   constructor(){
     app.initializeApp(config);
 
@@ -33,3 +33,5 @@ export class Firebase {
 
   users = () => this.db.ref('users');
 }
+
+export default Firebase;

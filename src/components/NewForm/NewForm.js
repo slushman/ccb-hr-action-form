@@ -3,20 +3,20 @@ import { FastField, Form } from 'formik';
 import styled from 'styled-components';
 import uuidv4 from 'uuid/v4';
 
-import { RequestType } from '../FieldGroups/RequestType';
-import { NewHireFields } from '../FieldGroups/NewHireFields';
-import { EmploymentType } from '../FieldGroups/EmploymentType';
-import { AcquisitionType } from '../FieldGroups/AcquisitionType';
-import { Comments } from '../FieldGroups/Comments';
-import { ResignationTerminationFields } from '../FieldGroups/ResignationTerminationFields';
-import { RoleChangeFields } from '../FieldGroups/RoleChangeFields';
-import { TransferPromotionFields } from '../FieldGroups/TransferPromotionFields';
-import { AddRoleFields } from '../FieldGroups/AddRoleFields';
-import { NewPositionFields } from '../FieldGroups/NewPositionFields';
-import { LeaveFields } from '../FieldGroups/LeaveFields';
-import { EffectiveDate } from '../FieldGroups/EffectiveDate';
-import { AssociateName } from '../FieldGroups/AssociateName';
-import { FormName } from '../FieldGroups/FormName';
+import RequestType from '../FieldGroups/RequestType';
+import NewHireFields from '../FieldGroups/NewHireFields';
+import EmploymentType from '../FieldGroups/EmploymentType';
+import AcquisitionType from '../FieldGroups/AcquisitionType';
+import Comments from '../FieldGroups/Comments';
+import ResignationTerminationFields from '../FieldGroups/ResignationTerminationFields';
+import RoleChangeFields from '../FieldGroups/RoleChangeFields';
+import TransferPromotionFields from '../FieldGroups/TransferPromotionFields';
+import AddRoleFields from '../FieldGroups/AddRoleFields';
+import NewPositionFields from '../FieldGroups/NewPositionFields';
+import LeaveFields from '../FieldGroups/LeaveFields';
+import EffectiveDate from '../FieldGroups/EffectiveDate';
+import AssociateName from '../FieldGroups/AssociateName';
+import FormName from '../FieldGroups/FormName';
 
 import Button from '@material-ui/core/Button';
 

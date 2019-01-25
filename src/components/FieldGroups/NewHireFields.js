@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input } from '../Fields/Input';
-import { Select } from '../Fields/Select';
-import { AssociateName } from './AssociateName';
+import Input from '../Fields/Input';
+import Select from '../Fields/Select';
+import AssociateName from './AssociateName';
 
 const Fieldset = styled.fieldset`
   margin-bottom: 1.5em;
@@ -16,7 +16,7 @@ const Legend = styled.legend``;
  * and
  * employmentType is new-hire
  */
-export class NewHireFields extends Component {
+class NewHireFields extends Component {
   render() {
     return (
       <Fieldset>
@@ -88,3 +88,5 @@ export class NewHireFields extends Component {
     );
   }
 }
+
+export default NewHireFields;

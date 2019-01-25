@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input } from '../Fields/Input';
-import { Select } from '../Fields/Select';
+import Input from '../Fields/Input';
+import Select from '../Fields/Select';
 
 const Fieldset = styled.fieldset`
   margin-bottom: 1.5em;
@@ -13,7 +13,7 @@ const Legend = styled.legend``;
  * Fields that appear if:
  * requestType is add-role
  */
-export class AddRoleFields extends Component {
+class AddRoleFields extends Component {
   render() {
     return (
       <Fieldset>
@@ -57,3 +57,5 @@ export class AddRoleFields extends Component {
     );
   }
 }
+
+export default AddRoleFields;

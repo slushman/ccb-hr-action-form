@@ -6,7 +6,7 @@ import {
   Link, 
 } from 'react-router-dom';
 
-import { TablePaginationActions } from './TablePaginationActions';
+import TablePaginationActions from './TablePaginationActions';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -52,7 +52,7 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-export class YourFormsTable extends Component {
+class YourFormsTable extends Component {
 
   static propTypes = {
     forms: PropTypes.array.isRequired,
@@ -163,3 +163,5 @@ export class YourFormsTable extends Component {
     );
   }
 }
+
+export default YourFormsTable;

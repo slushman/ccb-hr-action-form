@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Input } from '../Fields/Input';
+import Input from '../Fields/Input';
 
-export class AssociateName extends Component {
+class AssociateName extends Component {
   render() {
     return (
       <Input
@@ -12,3 +12,5 @@ export class AssociateName extends Component {
     );
   }
 }
+
+export default AssociateName;

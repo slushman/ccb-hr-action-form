@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import styled from 'styled-components';
-import { Input } from '../Fields/Input';
-import { Select } from '../Fields/Select';
+import Input from '../Fields/Input';
+import Select from '../Fields/Select';
 import { AssociateName } from './AssociateName';
 
 const Fieldset = styled.fieldset`
@@ -16,7 +16,7 @@ const Legend = styled.legend``;
  * and
  * acquisitionType is fill-position
  */
-export class FillPositionFields extends Component {
+class FillPositionFields extends Component {
   render() {
     return (
       <Fieldset>
@@ -94,3 +94,5 @@ export class FillPositionFields extends Component {
     );
   }
 }
+
+export default FillPositionFields;
