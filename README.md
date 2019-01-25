@@ -10,6 +10,12 @@
 * Moment.js
 * Styled Components
 
+# Tech to Add
+* TypeScript
+* Redux
+* Slack API
+* 
+
 
 # TODO
 * Send notification on form submission to Slack.
