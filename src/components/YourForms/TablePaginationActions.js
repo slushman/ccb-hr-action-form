@@ -24,6 +24,13 @@ const TableActionsWrap = styled.div`
 
 export class TablePaginationActions extends Component {
 
+  static propTypes = {
+    count: PropTypes.number.isRequired,
+    onChangePage: PropTypes.func.isRequired,
+    page: PropTypes.number.isRequired,
+    rowsPerPage: PropTypes.number.isRequired,
+  };
+
   handleBackPageButtonClick = event => {
     this.props.onChangePage( event, this.props.page - 1 );
   }
@@ -81,10 +88,3 @@ export class TablePaginationActions extends Component {
     );
   }
 }
-
-TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-};

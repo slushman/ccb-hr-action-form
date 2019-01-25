@@ -27,6 +27,18 @@ const StyledSelect = styled(FastField)`
 StyledSelect.displayName = 'StyledSelect';
 
 export class Select extends Component {
+
+  static propTypes = {
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    options: PropTypes.array.isRequired,
+    placeholder: PropTypes.string,
+  };
+  
+  static defaultProps = {
+    placeholder: '- Select -',
+  };
+
   render() {
     const {label, name, options, placeholder} = this.props;
     return (
@@ -47,14 +59,3 @@ export class Select extends Component {
     );
   }
 }
-
-Select.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  placeholder: PropTypes.string,
-};
-
-Select.defaultProps = {
-  placeholder: '- Select -',
-};

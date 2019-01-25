@@ -65,6 +65,11 @@ const maybeFormatDate = (fieldData, fieldKey) => {
 }
 
 export class ViewForm extends Component {
+
+  static propTypes = {
+    form: PropTypes.object.isRequired,
+  };
+
   render() {
     const { form } = this.props;
     const hasData = R.filter( R.compose( R.not, R.isEmpty), form );
@@ -138,7 +143,3 @@ export class ViewForm extends Component {
     );
   }
 }
-
-ViewForm.propTypes = {
-  form: PropTypes.object.isRequired,
-};
