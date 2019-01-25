@@ -64,7 +64,7 @@ const maybeFormatDate = (fieldData, fieldKey) => {
   return fieldData;
 }
 
-export class ViewForm extends Component {
+class ViewForm extends Component {
 
   static propTypes = {
     form: PropTypes.object.isRequired,
@@ -143,3 +143,5 @@ export class ViewForm extends Component {
     );
   }
 }
+
+export default ViewForm;

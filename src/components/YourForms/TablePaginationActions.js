@@ -22,7 +22,7 @@ const TableActionsWrap = styled.div`
   margin-left: ${ props => props.theme.spacing.unit * 2.5 }px;
 `;
 
-export class TablePaginationActions extends Component {
+class TablePaginationActions extends Component {
 
   static propTypes = {
     count: PropTypes.number.isRequired,
@@ -88,3 +88,5 @@ export class TablePaginationActions extends Component {
     );
   }
 }
+
+export default TablePaginationActions;

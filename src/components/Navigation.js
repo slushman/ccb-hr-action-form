@@ -10,7 +10,7 @@ import { NavAuthed } from './NavAuthed';
 import { AuthUserContext } from './Session';
 import { SignInPage } from '../pages/SignInPage';
 
-export class Navigation extends Component {
+class Navigation extends Component {
   render() {
     return (
       <AuthUserContext.Consumer>
@@ -28,3 +28,5 @@ const NavUnauthed = () => (
     <Redirect to={ROUTES.SIGN_IN} />
   </Switch>
 );
+
+export default Navigation;

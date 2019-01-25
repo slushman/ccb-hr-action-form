@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from '../Fields/Input';
+import Input from '../Fields/Input';
 
 /**
  * Appears for the following criteria:
@@ -17,4 +17,4 @@ class FormName extends Component {
   };
 }
 
-export { FormName };
+export default FormName;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Select } from '../Fields/Select';
+import Select from '../Fields/Select';
 
 /**
  * Field appears if:
  * requestType is employment
  */
-export class EmploymentType extends Component {
+class EmploymentType extends Component {
   render() {
     return (
       <Select
@@ -34,3 +34,5 @@ export class EmploymentType extends Component {
     );
   }
 }
+
+export default EmploymentType;

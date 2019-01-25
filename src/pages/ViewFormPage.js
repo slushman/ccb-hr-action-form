@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { ViewForm } from '../components/ViewForm';
+import ViewForm from '../components/ViewForm';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -32,7 +32,7 @@ const WrappingPaper = styled(Paper)`
   padding: ${ props => props.theme.spacing.unit * 3}px;
 `;
 
-export class ViewFormPage extends Component {
+class ViewFormPage extends Component {
 
   componentDidMount() {
     this.props.setTitle('View HR Action Form');
@@ -55,3 +55,5 @@ export class ViewFormPage extends Component {
     );
   }
 }
+
+export default ViewFormPage;

@@ -26,7 +26,7 @@ const TextareaElement = styled(FastField)`
 `;
 TextareaElement.displayName = 'TextareaElement';
 
-export class Textarea extends Component {
+class Textarea extends Component {
 
   static propTypes = {
     cols: PropTypes.number,
@@ -72,3 +72,5 @@ export class Textarea extends Component {
     );
   }
 }
+
+export default Textarea;

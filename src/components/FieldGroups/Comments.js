@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Textarea } from '../Fields/Textarea';
+import Textarea from '../Fields/Textarea';
 
 /**
  * Field appears if:
  * requestType is not empty.
  */
-export class Comments extends Component {
+class Comments extends Component {
   render() {
     return (
       <Textarea
@@ -16,3 +16,5 @@ export class Comments extends Component {
     );
   }
 }
+
+export default Comments;

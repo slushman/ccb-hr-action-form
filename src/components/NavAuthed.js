@@ -22,7 +22,7 @@ import Button from '@material-ui/core/Button';
 import * as ROUTES from '../constants/routes';
 import { YourFormsPage } from '../pages/YourFormsPage';
 import { NewFormPage } from '../pages/NewFormPage';
-import { ViewFormPage } from '../pages/ViewFormPage';
+import ViewFormPage from '../pages/ViewFormPage';
 
 const StyledNavLink = styled(NavLink)``;
 

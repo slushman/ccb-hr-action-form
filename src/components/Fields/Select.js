@@ -26,7 +26,7 @@ const StyledSelect = styled(FastField)`
 `;
 StyledSelect.displayName = 'StyledSelect';
 
-export class Select extends Component {
+class Select extends Component {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -59,3 +59,5 @@ export class Select extends Component {
     );
   }
 }
+
+export default Select;

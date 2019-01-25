@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input } from '../Fields/Input';
-import { Select } from '../Fields/Select';
+import Input from '../Fields/Input';
+import Select from '../Fields/Select';
 
 const Fieldset = styled.fieldset`
   margin-bottom: 1.5em;
@@ -15,7 +15,7 @@ const Legend = styled.legend``;
  * and
  * employmentType is resignation or termination
  */
-export class ResignationTerminationFields extends Component {
+class ResignationTerminationFields extends Component {
   render() {
     const { values } = this.props;
     return (
@@ -48,3 +48,5 @@ export class ResignationTerminationFields extends Component {
     );
   }
 }
+
+export default ResignationTerminationFields;

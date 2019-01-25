@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input } from '../Fields/Input';
-import { Select } from '../Fields/Select';
+import Input from '../Fields/Input';
+import Select from '../Fields/Select';
 
 const Fieldset = styled.fieldset`
   margin-bottom: 1.5em;
@@ -15,7 +15,7 @@ const Legend = styled.legend``;
  * and
  * acquisitionType is new-position
  */
-export class NewPositionFields extends Component {
+class NewPositionFields extends Component {
   render() {
     return (
       <Fieldset>
@@ -92,3 +92,5 @@ export class NewPositionFields extends Component {
     );
   }
 }
+
+export default NewPositionFields;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input } from '../Fields/Input';
-import { Select } from '../Fields/Select';
-import { AssociateName } from './AssociateName';
+import Input from '../Fields/Input';
+import Select from '../Fields/Select';
+import AssociateName from './AssociateName';
 
 const Fieldset = styled.fieldset`
   margin-bottom: 1.5em;
@@ -14,7 +14,7 @@ const Legend = styled.legend``;
  * Fields that appear if:
  * requestType is leave
  */
-export class LeaveFields extends Component {
+class LeaveFields extends Component {
   render() {
     const { values } = this.props;
     return (
@@ -90,3 +90,5 @@ export class LeaveFields extends Component {
     );
   }
 }
+
+export default LeaveFields;
