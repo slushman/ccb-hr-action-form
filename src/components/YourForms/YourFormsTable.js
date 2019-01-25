@@ -54,6 +54,10 @@ const StyledTableRow = styled(TableRow)`
 
 export class YourFormsTable extends Component {
 
+  static propTypes = {
+    forms: PropTypes.array.isRequired,
+  };
+
   state = {
     page: 0,
     rows: [],
@@ -159,7 +163,3 @@ export class YourFormsTable extends Component {
     );
   }
 }
-
-YourFormsTable.propTypes = {
-  forms: PropTypes.array.isRequired,
-};

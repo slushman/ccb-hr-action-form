@@ -27,6 +27,23 @@ const TextareaElement = styled(FastField)`
 TextareaElement.displayName = 'TextareaElement';
 
 export class Textarea extends Component {
+
+  static propTypes = {
+    cols: PropTypes.number,
+    id: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    handleBlur: PropTypes.func,
+    handleChange: PropTypes.func,
+    rows: PropTypes.number,
+    value: PropTypes.string,
+  };
+  
+  static defaultProps = {
+    cols: 50,
+    rows: 10,
+  };
+
   render() {
     const {
       cols,
@@ -55,19 +72,3 @@ export class Textarea extends Component {
     );
   }
 }
-
-Textarea.propTypes = {
-  cols: PropTypes.number,
-  id: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  rows: PropTypes.number,
-  value: PropTypes.string,
-};
-
-Textarea.defaultProps = {
-  cols: 50,
-  rows: 10,
-};

@@ -27,6 +27,22 @@ const InputElement = styled(FastField)`
 InputElement.displayName = 'InputElement';
 
 export class Input extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    id: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    handleBlur: PropTypes.func,
+    handleChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    type: PropTypes.string,
+    value: PropTypes.string,
+  };
+
+  static defaultProps = {
+    type: 'text',
+  };
+
   render() {
     const {
       id,
@@ -55,21 +71,5 @@ export class Input extends Component {
     );
   }
 }
-
-Input.propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-};
-
-Input.defaultProps = {
-  type: 'text',
-};
 
 export default Input;

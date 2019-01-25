@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
 export default class UserInfo extends Component {
+	
   static propTypes = {
 	userInfo: PropTypes.object.isRequired,
   }
