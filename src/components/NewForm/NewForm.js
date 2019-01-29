@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
 import { FastField, Form } from 'formik';
 import styled from 'styled-components';
-import uuidv4 from 'uuid/v4';
 
-import RequestType from '../FieldGroups/RequestType';
-import NewHireFields from '../FieldGroups/NewHireFields';
-import EmploymentType from '../FieldGroups/EmploymentType';
-import AcquisitionType from '../FieldGroups/AcquisitionType';
-import Comments from '../FieldGroups/Comments';
-import ResignationTerminationFields from '../FieldGroups/ResignationTerminationFields';
-import RoleChangeFields from '../FieldGroups/RoleChangeFields';
-import TransferPromotionFields from '../FieldGroups/TransferPromotionFields';
-import AddRoleFields from '../FieldGroups/AddRoleFields';
-import NewPositionFields from '../FieldGroups/NewPositionFields';
-import LeaveFields from '../FieldGroups/LeaveFields';
-import EffectiveDate from '../FieldGroups/EffectiveDate';
-import AssociateName from '../FieldGroups/AssociateName';
-import FormName from '../FieldGroups/FormName';
+import RequestType from './RequestType';
+import NewHireFields from './NewHireFields';
+import EmploymentType from './EmploymentType';
+import AcquisitionType from './AcquisitionType';
+import Comments from './Comments';
+import ResignationTerminationFields from './ResignationTerminationFields';
+import RoleChangeFields from './RoleChangeFields';
+import TransferPromotionFields from './TransferPromotionFields';
+import AddRoleFields from './AddRoleFields';
+import NewPositionFields from './NewPositionFields';
+import LeaveFields from './LeaveFields';
+import EffectiveDate from './EffectiveDate';
+import AssociateName from './AssociateName';
+import FormName from './FormName';
+import ApprovalFields from './ApprovalFields';
 
 import Button from '@material-ui/core/Button';
 
 const Heading1 = styled.h1``;
+Heading1.displayName = 'Heading1';
 
 const StyledForm = styled(Form)`
   margin: 0 auto;
   width: 100%;
 `;
+StyledForm.displayName = 'StyledForm';
 
 /**
  * Unique ID generated in constructor so each page load generates a new one.
  * https://stackoverflow.com/questions/29420835/how-to-generate-unique-ids-for-form-labels-in-react
  */
 class NewForm extends Component {
-
-  constructor(props) {
-    super(props);
-    this.uuid = uuidv4();
-  }
-
   render() {
     const { values } = this.props;
     return (
@@ -59,11 +55,15 @@ class NewForm extends Component {
             <NewHireFields {...this.props} />
         }
         {
-          'employment' === values.requestType && 
-          ( 'rehire' === values.employmentType ||
-            'resignation' === values.employmentType ||
-            'termination' === values.employmentType
-          ) &&
+          ( 
+            ( 'employment' === values.requestType && 
+              ( 'rehire' === values.employmentType ||
+                'resignation' === values.employmentType ||
+                'termination' === values.employmentType
+              ) 
+            ) ||
+            'leave' === values.requestType
+           ) &&
             <AssociateName {...this.props} />
         }
         {
@@ -108,12 +108,22 @@ class NewForm extends Component {
             <LeaveFields {...this.props} values={values} />
         }
         {
-          ( 'employment' === values.requestType || 'leave' === values.requestType || 'role-change' === values.requestType || 'transfer-promotion' === values.requestType ) &&
+          ( 'employment' === values.requestType || 
+            ( 'talent-acquisition' === values.requestType &&
+              'fill-position' === values.acquisitionType ) ||
+            'leave' === values.requestType || 
+            'role-change' === values.requestType || 
+            'transfer-promotion' === values.requestType 
+          ) &&
             <EffectiveDate {...this.props} />
         }
         {
           '' !== values.requestType &&
             <Comments {...this.props} />
+        }
+        {
+          '' !== values.requestType &&
+            <ApprovalFields values={values} />
         }
         <Button
           color="primary"
@@ -125,4 +135,4 @@ class NewForm extends Component {
   }
 }
 
-export { NewForm };
+export default NewForm;
