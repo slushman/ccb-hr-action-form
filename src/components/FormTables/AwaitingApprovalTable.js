@@ -120,6 +120,7 @@ class AwaitingApprovalTable extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { page, rows, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (

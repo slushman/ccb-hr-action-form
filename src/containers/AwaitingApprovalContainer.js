@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { compose } from 'recompose';
+import { withAuthentication } from '../components/Session';
 import { withFirebase } from '../components/Firebase';
+
 
 //import { forms } from '../constants/testForms';
 import AwaitingApprovalTable from '../components/FormTables/AwaitingApprovalTable';
 
-class AwaitingApprovalContainer extends Component {
+class AwaitingApprovalContainerComp extends Component {
   state = {
     error: false,
     forms: [],
@@ -52,10 +55,16 @@ class AwaitingApprovalContainer extends Component {
     }
     return (
       <AwaitingApprovalTable
+        authUser={this.props.authUser}
         forms={ this.state.forms }
       />
     );
   }
 }
 
-export default withFirebase( AwaitingApprovalContainer );
+const AwaitingApprovalContainer = compose(
+  withAuthentication,
+  withFirebase,
+)( AwaitingApprovalContainerComp );
+
+export { AwaitingApprovalContainer, AwaitingApprovalContainerComp };
