@@ -6,7 +6,7 @@ import {
   Link, 
 } from 'react-router-dom';
 
-import TablePaginationActions from './TablePaginationActions';
+import TablePaginationActions from '../FormTables/TablePaginationActions';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
