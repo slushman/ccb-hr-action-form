@@ -29,7 +29,7 @@ StyledSelect.displayName = 'StyledSelect';
 class Select extends Component {
 
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     name: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     placeholder: PropTypes.string,
