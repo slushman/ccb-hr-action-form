@@ -6,6 +6,12 @@ export const fields = [
 		displayOrder: 3,
 	},
 	{
+		key: 'approvals',
+		label: 'Approvals',
+		defaultValue: '',
+		displayOrder: 38,
+	},
+	{
 		key: 'comments',
 		label: 'Comments',
 		defaultValue: '',
@@ -94,6 +100,18 @@ export const fields = [
 		label: 'Form Name',
 		defaultValue: '',
 		displayOrder: null,
+	},
+	{
+		key: 'formStatus',
+		label: 'Form Status',
+		defaultValue: '',
+		displayOrder: 39,
+	},
+	{
+		key: 'formStatusBy',
+		label: 'Form Status Updated By',
+		defaultValue: '',
+		displayOrder: 40,
 	},
 	{
 		key: 'hiringLead',
