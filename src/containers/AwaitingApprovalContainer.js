@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { withFirebase } from '../components/Firebase';
 
 //import { forms } from '../constants/testForms';
-import YourFormsTable from '../components/FormTables/YourFormsTable';
+import AwaitingApprovalTable from '../components/FormTables/AwaitingApprovalTable';
 
-class YourFormsContainer extends Component {
+class AwaitingApprovalContainer extends Component {
   state = {
     error: false,
     forms: [],
@@ -51,11 +51,11 @@ class YourFormsContainer extends Component {
       return null;
     }
     return (
-      <YourFormsTable
+      <AwaitingApprovalTable
         forms={ this.state.forms }
       />
     );
   }
 }
 
-export default withFirebase( YourFormsContainer );
+export default withFirebase( AwaitingApprovalContainer );
