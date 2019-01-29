@@ -1,5 +1,5 @@
 import Select from '../Select';
-import { shallowFactory } from '../../testUtils';
+import { shallowFactory } from '../../../testUtils';
 
 const factory = shallowFactory(Select, {
   label: '',
@@ -16,7 +16,7 @@ describe('<Select/>', () => {
     const findWrap = wrapper.find('SelectWrap');
     expect(findWrap.exists()).toBe(true);
 
-    // Input exists
+    // Select exists
     const findSelect = wrapper.find('StyledSelect');
     expect(findSelect.exists()).toBe(true);
 
