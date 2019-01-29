@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import moment from 'moment';
 
-import { NewForm } from '../components/NewForm/NewForm';
+import NewForm from '../components/NewForm/NewForm';
 import { AuthUserContext } from '../components/Session';
 
 import * as ROUTES from '../constants/routes';
