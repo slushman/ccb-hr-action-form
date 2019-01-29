@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 
 import { AuthUserContext } from '../components/Session';
 import { withFirebase } from '../components/Firebase';
-import AwaitingApprovalContainer from '../containers/AwaitingApprovalContainer';
+import { AwaitingApprovalContainer } from '../containers/AwaitingApprovalContainer';
 import YourFormsContainer from '../containers/YourFormsContainer';
 import UserInfo from '../components/UserInfo';
 

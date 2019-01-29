@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import {
-  Redirect,
-  Route,
-  Switch
-} from 'react-router-dom';
 
-import * as ROUTES from '../../constants/routes';
-import { SignInPage } from '../../pages/SignInPage';
+import { AuthUserContext } from '../Session';
+import NavAuthed from './NavAuthed';
+import NavUnauthed from './NavUnauthed';
 
 class Navigation extends Component {
   render() {
     return (
-      <Switch>
-        <Route path={ROUTES.SIGN_IN} component={SignInPage} title="Sign In" />
-        <Redirect to={ROUTES.SIGN_IN} />
-      </Switch>
+      <AuthUserContext.Consumer>
+        {
+          authUser => authUser ? <NavAuthed /> : <NavUnauthed />
+        }
+      </AuthUserContext.Consumer>
     );
   }
 }
