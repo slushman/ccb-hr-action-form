@@ -7,6 +7,7 @@ import { AuthUserContext } from '../components/Session';
 import { withFirebase } from '../components/Firebase';
 import YourFormsContainer from '../containers/YourFormsContainer';
 import UserInfo from '../components/UserInfo';
+import AwaitingApprovalTable from '../components/FormTables/AwaitingApproval';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
