@@ -22,6 +22,7 @@ React app that allows leaders within CCB to post an HR action form.
 
 
 ## TODO
+* Need process and UI for approving through the web interface.
 * Send notification on form submission to Slack.
 * Get response from Slack, save to Firebase DB.
 * Send additional notifications to Slack based on previous Slack responses.
