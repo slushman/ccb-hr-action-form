@@ -5,9 +5,9 @@ import { compose } from 'recompose';
 
 import { AuthUserContext } from '../components/Session';
 import { withFirebase } from '../components/Firebase';
+import AwaitingApprovalContainer from '../containers/AwaitingApprovalContainer';
 import YourFormsContainer from '../containers/YourFormsContainer';
 import UserInfo from '../components/UserInfo';
-import AwaitingApprovalTable from '../components/FormTables/AwaitingApproval';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -55,6 +55,7 @@ class YourForms extends Component {
                   authUser => (
                     <Fragment>
                       <UserInfo userInfo={authUser.providerData[0]} />
+                      <AwaitingApprovalContainer authUser={authUser} />
                       <YourFormsContainer authUser={authUser} />
                     </Fragment>
                   )
