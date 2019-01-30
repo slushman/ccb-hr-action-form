@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 class UserInfo extends Component {
 	
   static propTypes = {
-	userInfo: PropTypes.object.isRequired,
+		userInfo: PropTypes.object.isRequired,
   }
 
   render() {
