@@ -70,11 +70,15 @@ class ViewForm extends Component {
     form: PropTypes.object.isRequired,
   };
 
-  render() {
+  state = {
+    data: [],
+  };
+
+  componentDidMount() {
     const { form } = this.props;
     const hasData = R.filter( R.compose( R.not, R.isEmpty), form );
     let fieldData = Object.entries(hasData);
-    const removeTheseFields = ['dateSubmitted','formId','formName','submitterId'];
+    const removeTheseFields = ['approvals','dateSubmitted','formId','formName','submitterId'];
     fieldData = fieldData.filter( data => {
       return ! removeTheseFields.includes(data[0]) 
     });
@@ -83,12 +87,22 @@ class ViewForm extends Component {
       data.displayOrder = fieldInfo.displayOrder;
     });
     fieldData = sortByDisplayOrder( fieldData );
+    
+    this.setState({
+      data: fieldData,
+    });
+  }
+
+  render() {
+    if ( 1 > this.state.data.length ) {
+      return null;
+    }
     return (
       <ThemeProvider theme={theme}>
         <Main>
           <CssBaseline />
           <Grid item xs={ 12 }>
-            <Typography component="h1" paragraph variant="title">{ hasData.formName }</Typography>
+            <Typography component="h1" paragraph variant="title">{ this.props.formName }</Typography>
 
             <Typography component="h2" paragraph>Form Fields</Typography>
             <StyledTable>
@@ -100,12 +114,14 @@ class ViewForm extends Component {
               </StyledTableHead>
               <TableBody>
                 {
-                  fieldData.map((field,i) => {
+                  this.state.data.map((field,i) => {
                     const fieldInfo = R.find(R.propEq('key', field[0]))(fields);
+                    const formattedData = maybeFormatDate( field[1], field[0] );
+                    console.log(formattedData);
                     return (
                       <StyledTableRow key={ i }>
                         <TableCell>{ fieldInfo.label }</TableCell>
-                        <TableCell>{ maybeFormatDate( field[1], field[0] ) }</TableCell>
+                        <TableCell>{ formattedData }</TableCell>
                       </StyledTableRow>
                     )
                   })
@@ -124,7 +140,7 @@ class ViewForm extends Component {
               <TableBody>
                 <StyledTableRow>
                   <TableCell>Date Submitted</TableCell>
-                  <TableCell>{ moment( form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                  <TableCell>{ moment( this.props.form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
                 </StyledTableRow>
                 {/*
                   form.approvals.map((approval,i) => {
