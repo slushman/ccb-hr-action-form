@@ -22,23 +22,23 @@ describe('<ApprovalFields/>', () => {
     expect(findLT.exists()).toBe(true);
 
     // HR Hidden Input exists
-    const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+    const findHRApproval = wrapper.find('[name="approvalsHR"]');
     expect(findHRApproval.exists()).toBe(true);
 
     // Finance Hidden Input does not exist
-    const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+    const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
     expect(findFinanceApproval.exists()).toBe(false);
 
     // CEO Hidden Input does not exist
-    const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+    const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
     expect(findCEOApproval.exists()).toBe(false);
 
     // IT Hidden Input exists
-    const findITApproval = wrapper.find('[name="approvals[it]"]');
+    const findITApproval = wrapper.find('[name="approvalsIT"]');
     expect(findITApproval.exists()).toBe(false);
 
     // Facilities Hidden Input exists
-    const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+    const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
     expect(findFacilitiesApproval.exists()).toBe(false);
   });
 
@@ -55,23 +55,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(true);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(false);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });
@@ -90,23 +90,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(true);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(false);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(true);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(true);
     });
   });
@@ -126,23 +126,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(true);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(false);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(true);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(true);
     });
   });
@@ -161,23 +161,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(true);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(true);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });
@@ -194,23 +194,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(false);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(false);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });
@@ -229,23 +229,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(true);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(false);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });
@@ -264,23 +264,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(false);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(true);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });
@@ -300,23 +300,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(true);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(true);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });
@@ -336,23 +336,23 @@ describe('<ApprovalFields/>', () => {
       expect(wrapper.exists()).toBe(true);
 
       // HR Hidden Input exists
-      const findHRApproval = wrapper.find('[name="approvals[hr]"]');
+      const findHRApproval = wrapper.find('[name="approvalsHR"]');
       expect(findHRApproval.exists()).toBe(true);
 
       // Finance Hidden Input does not exist
-      const findFinanceApproval = wrapper.find('[name="approvals[finance]"]');
+      const findFinanceApproval = wrapper.find('[name="approvalsFinance"]');
       expect(findFinanceApproval.exists()).toBe(false);
 
       // CEO Hidden Input does not exist
-      const findCEOApproval = wrapper.find('[name="approvals[ceo]"]');
+      const findCEOApproval = wrapper.find('[name="approvalsCEO"]');
       expect(findCEOApproval.exists()).toBe(false);
 
       // IT Hidden Input exists
-      const findITApproval = wrapper.find('[name="approvals[it]"]');
+      const findITApproval = wrapper.find('[name="approvalsIT"]');
       expect(findITApproval.exists()).toBe(false);
 
       // Facilities Hidden Input exists
-      const findFacilitiesApproval = wrapper.find('[name="approvals[facilities]"]');
+      const findFacilitiesApproval = wrapper.find('[name="approvalsFacilities"]');
       expect(findFacilitiesApproval.exists()).toBe(false);
     });
   });

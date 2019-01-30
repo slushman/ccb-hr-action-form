@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FastField } from 'formik';
@@ -20,19 +20,14 @@ class ApprovalFields extends Component {
     values: PropTypes.object.isRequired,
   };
 
-  /**
-   * 
-   */
-
   render() {
     const { values } = this.props;
     return (
       <Fieldset>
         <Legend>Approvals Needed</Legend>
         <FastField
-          name="approvals[hr]"
+          name="approvalsHR"
           type="hidden"
-          value="sondra-calhoun"
         />
         { ( 'employment' === values.requestType ||
           ( 'talent-acquisition' === values.requestType &&
@@ -40,14 +35,13 @@ class ApprovalFields extends Component {
             'add-role' === values.requestType ||
             'leave' === values.requestType ) &&
           <FastField
-            name="approvals[finance]"
+            name="approvalsFinance"
             type="hidden"
-            value="someone?"
           />
         }
         <Select
           label="Leadership Team"
-          name="approvals[lt]"
+          name="approvalsLT"
           options={[
             {
               label: 'Aaron Senneff',
@@ -73,30 +67,26 @@ class ApprovalFields extends Component {
           'add-role' === values.requestType ||
           'transfer-promotion' === values.requestType ) &&
           <FastField
-            name="approvals[ceo]"
+            name="approvalsCEO"
             type="hidden"
-            value="don-harms"
           />
         }
         { ( 'employment' === values.requestType &&
             ( 'new-hire' === values.employmentType ||
               'rehire' === values.employmentType )
           ) &&
-          <FastField
-            name="approvals[it]"
-            type="hidden"
-            value="joe-donnellon"
-          />
-        }
-        { ( 'employment' === values.requestType &&
-            ( 'new-hire' === values.employmentType ||
-              'rehire' === values.employmentType )
-          ) &&
-          <FastField
-            name="approvals[facilities]"
-            type="hidden"
-            value="john-zabka"
-          />
+          (
+            <Fragment>
+              <FastField
+                name="approvalsIT"
+                type="hidden"
+              />
+              <FastField
+                name="approvalsFacilities"
+                type="hidden"
+              />
+            </Fragment>
+          )
         }
       </Fieldset>
     );
