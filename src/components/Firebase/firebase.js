@@ -29,9 +29,15 @@ class Firebase {
     return this.auth.signOut();
   }
 
-  user = uid => this.db.ref(`users/${uid}`);
+  user = uid => this.db.doc(`users/${uid}`);
 
-  users = () => this.db.ref('users');
+  users = () => this.db.collection('users');
+
+
+
+  form = uid => this.db.doc(`forms/${uid}`);
+
+  forms = () => this.db.collection('forms');
 }
 
 export default Firebase;
