@@ -48,6 +48,32 @@ class AwaitingApprovalContainerComp extends Component {
       });
     }
   }
+
+  handleApproval = (row) => (event) => {
+    const currentUser = this.props.authUser;
+    console.log({row,currentUser});
+    const docRef = this.props.firebase.db.collection('forms').doc(row.formId);
+
+    // who should be next in the chain?
+    // should this approval message then show "waiting on {next person}"?
+
+    docRef.update({formStatus: row.formStatus + 1});
+    docRef.update({formStatusBy: currentUser.uid});
+
+    // write to Firestore on the form object
+    // add an approval in the approvals array
+    // change status to waiting for ...next role
+  }
+
+  handleDenial = (row) => ( event ) => {
+    const currentUser = this.props.authUser;
+    const docRef = this.props.firebase.db.collection('forms').doc(row.formId);
+    // what else should happen here?
+    docRef.update({formStatus: 'Denied'});
+    docRef.update({formStatusBy: currentUser.uid});
+    // write to Firestore
+    // change status to denied
+  }
   
   render() {
     if ( 1 > this.state.forms.length ) {
@@ -57,6 +83,8 @@ class AwaitingApprovalContainerComp extends Component {
       <AwaitingApprovalTable
         authUser={this.props.authUser}
         forms={ this.state.forms }
+        handleApproval={this.handleApproval}
+        handleDenial={this.handleDenial}
       />
     );
   }

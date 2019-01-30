@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
-import moment from 'moment';
-import {
-  Link, 
-} from 'react-router-dom';
 
-import { withFirebase } from '../Firebase';
 import TablePaginationActions from './TablePaginationActions';
+import EmptyRow from './EmptyRow';
+import AwaitingFormsRow from './AwaitingFormsRow';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -54,16 +50,9 @@ const HeaderCell = styled(TableCell)`
   color: #545454 !important;
 `;
 
-const StyledTableRow = styled(TableRow)`
-  &:nth-of-type(odd) {
-    background-color: ${ props => props.theme.palette.background.default }
-  }
-`;
-
 class AwaitingApprovalTable extends Component {
 
   static propTypes = {
-    authUser: PropTypes.object.isRequired,
     forms: PropTypes.array.isRequired,
   };
 
@@ -91,36 +80,7 @@ class AwaitingApprovalTable extends Component {
     });
   }
 
-  handleApproval = (row) => (event) => {
-    const currentUser = this.props.authUser;
-    console.log({row,currentUser});
-    const docRef = this.props.firebase.db.collection('forms').doc(row.formId);
-
-    console.log(this.props.forms);
-
-    // who should be next in the chain?
-    // should this approval message then show "waiting on {next person}"?
-
-    docRef.update({formStatus: row.formStatus + 1});
-    docRef.update({formStatusBy: currentUser.uid});
-
-    // write to Firestore on the form object
-    // add an approval in the approvals array
-    // change status to waiting for ...next role
-  }
-
-  handleDenial = (row) => ( event ) => {
-    const currentUser = this.props.authUser;
-    const docRef = this.props.firebase.db.collection('forms').doc(row.formId);
-    // what else should happen here?
-    docRef.update({formStatus: 'Denied'});
-    docRef.update({formStatusBy: currentUser.uid});
-    // write to Firestore
-    // change status to denied
-  }
-
   render() {
-    console.log(this.props);
     const { page, rows, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (
@@ -140,50 +100,16 @@ class AwaitingApprovalTable extends Component {
                 </StyledTableHead>
                 <TableBody>
                   {
-                    rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => {
-                      return (
-                      <StyledTableRow key={ i }>
-                        <TableCell>
-                          <Link to={{
-                            pathname: `/viewform/${row.formId}`,
-                            state: {
-                              form: row
-                            },
-                          }}>
-                            {
-                              row.formName
-                            }
-                          </Link>
-                        </TableCell>
-                        <TableCell align="right">{row.requestType}</TableCell>
-                        <TableCell align="right">{ moment( row.dateSubmitted, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                        <TableCell align="right">
-                          <Button
-                            color="primary"
-                            onClick={ this.handleApproval(row) }
-                            size="small"
-                            style={{ marginRight: 16 }}
-                            type="submit"
-                            variant="contained"
-                          >Approve</Button>
-                          <Button
-                            color="secondary"
-                            onClick={ this.handleDenial(row) }
-                            size="small"
-                            type="submit"
-                            variant="contained"
-                          >Deny</Button>
-                        </TableCell>
-                      </StyledTableRow>
-                    )})
+                    rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => (
+                      <AwaitingFormsRow
+                        handleApproval={this.props.handleApproval}
+                        handleDenial={this.props.handleDenial}
+                        key={i}
+                        row={row}
+                      />
+                    ))
                   }
-                  {
-                    0 < emptyRows && (
-                      <TableRow>
-                        <TableCell colSpan={5}></TableCell>
-                      </TableRow>
-                    )
-                  }
+                  <EmptyRow emptyRows={emptyRows} />
                 </TableBody>
                 <TableFooter>
                   <TableRow>
@@ -211,4 +137,4 @@ class AwaitingApprovalTable extends Component {
   }
 }
 
-export default withFirebase(AwaitingApprovalTable);
+export default AwaitingApprovalTable;
