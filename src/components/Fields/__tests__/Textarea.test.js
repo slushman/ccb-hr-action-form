@@ -1,5 +1,5 @@
 import Textarea from '../Textarea';
-import { shallowFactory } from '../../testUtils';
+import { shallowFactory } from '../../../testUtils';
 
 const factory = shallowFactory(Textarea, {
   label: '',
