@@ -93,6 +93,39 @@ class NewFormPageComp extends Component {
     this.props.setTitle('New HR Action Form');
   }
 
+  createApprovalsObj = (values) => {
+    const approvals = {};
+
+    approvals.lt = values.approvalsLT;
+
+    if ( values.approvalsHR ) {
+      approvals.hr = values.approvalsHR;
+      delete values.approvalsHR;
+    }
+
+    if ( values.approvalsFinance ) {
+      approvals.finance = values.approvalsFinance;
+      delete values.approvalsFinance;
+    }
+
+    if ( values.approvalsCEO ) {
+      approvals.ceo = values.approvalsCEO;
+      delete values.approvalsCEO;
+    }
+
+    if ( values.approvalsIT ) {
+      approvals.it = values.approvalsIT;
+      delete values.approvalsIT;
+    }
+
+    if ( values.approvalsFacilities ) {
+      approvals.facilities = values.approvalsFacilities;
+      delete values.approvalsFacilities;
+    }
+
+    return { approvals, values };
+  }
+
   render() {
     const { firebase } = this.props;
     return (
@@ -107,6 +140,12 @@ class NewFormPageComp extends Component {
                     <Formik
                       initialValues={{
                         acquisitionType: '',
+                        approvalsCEO: 'don-harms',
+                        approvalsFacilities: 'john-zabka',
+                        approvalsFinance: 'someone?',
+                        approvalsHR: 'sondra-calhoun',
+                        approvalsIT: 'joe-donnellon',
+                        approvalsLT: '',
                         comments: '',
                         dateBirth: '',
                         dateClosed: '',
@@ -146,11 +185,14 @@ class NewFormPageComp extends Component {
                         teamLeadPrevious: '',
                       }}
                       onSubmit={(values, {setSubmitting}) => {
+                        console.log(values);
+                        const { approvals, newValues } = this.createApprovalsObj(values);
                         firebase.db.collection('forms')
                           .add(
                             {
-                              ...values,
-                              dateSubmitted: moment(new Date()).format('YYYY-MM-DDTHH:mm:ss')
+                              ...newValues,
+                              dateSubmitted: moment(new Date()).format('YYYY-MM-DDTHH:mm:ss'),
+                              approvals: approvals,
                             }
                           )
                           .then(() => {
