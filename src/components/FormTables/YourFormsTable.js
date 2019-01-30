@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
-import moment from 'moment';
-import {
-  Link, 
-} from 'react-router-dom';
 
 import TablePaginationActions from './TablePaginationActions';
+import EmptyRow from './EmptyRow';
+import YourFormsRow from './YourFormsRow';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -45,12 +43,6 @@ const StyledTableHead = styled(TableHead)`
 
 const HeaderCell = styled(TableCell)`
   color: #545454 !important;
-`;
-
-const StyledTableRow = styled(TableRow)`
-  &:nth-of-type(odd) {
-    background-color: ${ props => props.theme.palette.background.default }
-  }
 `;
 
 class YourFormsTable extends Component {
@@ -103,34 +95,11 @@ class YourFormsTable extends Component {
                 </StyledTableHead>
                 <TableBody>
                   {
-                    rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => {
-                      return (
-                      <StyledTableRow key={ i }>
-                        <TableCell>
-                          <Link to={{
-                            pathname: `/viewform/${row.formId}`,
-                            state: {
-                              form: row
-                            },
-                          }}>
-                            {
-                              row.formName
-                            }
-                          </Link>
-                        </TableCell>
-                        <TableCell align="right">{row.requestType}</TableCell>
-                        <TableCell align="right">{ moment( row.dateSubmitted, 'YYYY-MM-DDTHH:mm:ss' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                        <TableCell align="right">{ 4 > row.formStatus ? `${row.formStatus}/4` : 'Approved'}</TableCell>
-                      </StyledTableRow>
-                    )})
+                    rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => (
+                      <YourFormsRow key={i} row={row} theme={theme} />
+                    ))
                   }
-                  {
-                    0 < emptyRows && (
-                      <TableRow>
-                        <TableCell colSpan={5}></TableCell>
-                      </TableRow>
-                    )
-                  }
+                  <EmptyRow emptyRows={emptyRows} />
                 </TableBody>
                 <TableFooter>
                   <TableRow>
