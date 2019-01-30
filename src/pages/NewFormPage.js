@@ -154,7 +154,7 @@ class NewFormPageComp extends Component {
                             }
                           )
                           .then(() => {
-                            this.props.history.push(ROUTES.YOUR_FORMS);
+                            this.props.history.push(ROUTES.FORMS);
                             setTimeout(() => {
                               alert('Form submitted!');
                               setSubmitting(false);
