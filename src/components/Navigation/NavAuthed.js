@@ -7,6 +7,9 @@ import {
   withRouter
 } from 'react-router-dom';
 import styled from 'styled-components';
+import { compose } from 'recompose';
+
+import { withFirebase } from '../Firebase';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -132,6 +135,9 @@ class NavAuthedComp extends Component {
   }
 }
 
-const NavAuthed = withRouter( NavAuthedComp );
+const NavAuthed = compose(
+  withRouter,
+  withFirebase,
+)( NavAuthedComp );
 
 export { NavAuthed, NavAuthedComp };

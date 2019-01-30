@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { AuthUserContext } from '../Session';
-import NavAuthed from './NavAuthed';
+import { NavAuthed } from './NavAuthed';
 import NavUnauthed from './NavUnauthed';
 
 class Navigation extends Component {
