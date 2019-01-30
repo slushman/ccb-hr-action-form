@@ -1,5 +1,5 @@
 import Input from '../Input';
-import { shallowFactory } from '../../testUtils';
+import { shallowFactory } from '../../../testUtils';
 
 const factory = shallowFactory(Input, {
   label: '',
