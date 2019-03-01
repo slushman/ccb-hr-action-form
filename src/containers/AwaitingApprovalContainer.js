@@ -3,8 +3,6 @@ import { compose } from 'recompose';
 import { withAuthentication } from '../components/Session';
 import { withFirebase } from '../components/Firebase';
 
-
-//import { forms } from '../constants/testForms';
 import AwaitingApprovalTable from '../components/FormTables/AwaitingApprovalTable';
 
 class AwaitingApprovalContainerComp extends Component {
