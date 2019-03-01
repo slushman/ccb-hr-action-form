@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../components/Firebase';
 
-//import { forms } from '../constants/testForms';
 import YourFormsTable from '../components/FormTables/YourFormsTable';
 
 class YourFormsContainer extends Component {
