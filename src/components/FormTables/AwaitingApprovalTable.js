@@ -49,7 +49,7 @@ class AwaitingApprovalTable extends React.Component {
     const { page, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (
-      <Grid item style={ { marginBottom: 40, marginTop: 20 } }>
+      <Grid>
         <Heading2>Forms waiting for your approval</Heading2>
         <WrappingPaper>
           <TableWrap>

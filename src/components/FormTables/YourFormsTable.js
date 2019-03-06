@@ -48,7 +48,7 @@ class YourFormsTable extends React.Component {
     const { page, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (
-      <Grid item style={{ marginBottom: 40, marginTop: 20 }}>
+      <Grid>
         <Heading2>Your Forms</Heading2>
         <WrappingPaper>
           <TableWrap>
