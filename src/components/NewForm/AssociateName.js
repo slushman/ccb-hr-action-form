@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Input from '../Fields/Input';
 
-class AssociateName extends Component {
+class AssociateName extends React.Component {
   render() {
     return (
       <Input

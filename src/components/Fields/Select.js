@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FastField } from 'formik';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -26,7 +26,7 @@ const StyledSelect = styled(FastField)`
 `;
 StyledSelect.displayName = 'StyledSelect';
 
-class Select extends Component {
+class Select extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,

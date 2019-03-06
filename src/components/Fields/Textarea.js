@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FastField } from 'formik';
 import styled from 'styled-components';
@@ -26,7 +26,7 @@ const TextareaElement = styled(FastField)`
 `;
 TextareaElement.displayName = 'TextareaElement';
 
-class Textarea extends Component {
+class Textarea extends React.Component {
 
   static propTypes = {
     cols: PropTypes.number,
