@@ -15,10 +15,10 @@ class UserInfo extends React.Component {
 		return (
 			<CenteredGrid>
 				<Avatar
-					alt={`${ authUser.displayName } headshot`}
+					alt={ `${ authUser.displayName } headshot` }
 					classes={{ root: 'MuiAvatar-margin-right-20' }}
 					component="span"
-					src={authUser.photoURL}
+					src={ authUser.photoURL }
 				/>
 				<span style={ { marginLeft: '1em' } }>Welcome, {authUser.displayName}</span>
 			</CenteredGrid>
