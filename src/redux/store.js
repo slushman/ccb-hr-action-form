@@ -8,8 +8,8 @@ export const history = createBrowserHistory();
 
 export const reduxFBConfig = {
   enableLogging: true,
-  userFirestoreForProfile: true,
-  userProfiler: 'users',
+  useFirestoreForProfile: true,
+  userProfile: 'users',
 };
 
 const enhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose(
