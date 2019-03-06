@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-export const ApproveButton = styled.button`
-  background-color: #43a047;
+export const buttonStyles = css`
+  border: none;
   border-radius: 4px;
-  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
+  box-sizing: border-box;
   color: #fff;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 0.8125rem;
@@ -14,6 +15,20 @@ export const ApproveButton = styled.button`
   padding: 4px 8px;
   text-transform: uppercase;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+`;
+
+export const buttonShadows = css`
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
+`;
+
+export const ApproveButton = styled.button`
+  ${ buttonStyles }
+  ${ buttonShadows }
+  background-color: #43a047;
+
+  &:hover {
+    background-color: #2e7d32;
+  }
 `;
 
 export const Avatar = styled.span`
@@ -41,19 +56,13 @@ export const CenteredGrid = styled.div`
 `;
 
 export const DenyButton = styled.button`
+  ${ buttonStyles }
+  ${ buttonShadows }
   background-color: #e53935;
-  border-radius: 4px;
-  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
-  color: #fff;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.5;
-  min-width: 64px;
-  margin-right: 16px;
-  padding: 4px 8px;
-  text-transform: uppercase;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  &:hover {
+    background-color: #c62828;
+  }
 `;
 
 export const Fieldset = styled.fieldset`
@@ -114,6 +123,21 @@ export const Main = styled.main`
     margin-left: auto;
     margin-right: auto;
     width: 60rem;
+  }
+`;
+
+export const NavButton = styled(NavLink)`
+  ${ buttonStyles }
+  align-items: center;
+  background-color: #3f51b5;
+  color: #fff;
+  display: flex;
+  font-size: 0.875rem;
+  justify-content: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #303f9f;
   }
 `;
 
