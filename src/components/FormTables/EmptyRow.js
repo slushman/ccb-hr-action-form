@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+import {
+  TableCell,
+  TableRow,
+} from '../../styles';
 
-class EmptyRow extends Component {
+class EmptyRow extends React.Component {
 
   static propTypes = {
     emptyRows: PropTypes.number.isRequired,
