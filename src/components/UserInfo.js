@@ -1,40 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withFirebase } from 'react-redux-firebase';
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
-class UserInfo extends Component {
-	
-  static propTypes = {
-		userInfo: PropTypes.object.isRequired,
-  }
+import {
+	CenteredGrid,
+} from '../styles';
 
-  render() {
-	const { userInfo } = this.props;
-	return (
-		<Grid
-			alignContent="center"
-			alignItems="center"
-			container
-			spacing={16}
-			wrap="nowrap"
-		>
-			<Grid item>
+class UserInfo extends React.Component {
+	render() {
+		const { authUser } = this.props;
+		return (
+			<CenteredGrid>
 				<Avatar
-					alt={`${ userInfo.displayName } headshot`}
+					alt={`${ authUser.displayName } headshot`}
 					classes={{ root: 'MuiAvatar-margin-right-20' }}
 					component="span"
-					src={userInfo.photoURL}
+					src={authUser.photoURL}
 				/>
-			</Grid>
-			<Grid item>
-				<Typography component="span">Welcome, {userInfo.displayName}</Typography>
-			</Grid>
-		</Grid>
-	)
+				<span style={ { marginLeft: '1em' } }>Welcome, {authUser.displayName}</span>
+			</CenteredGrid>
+		)
   }
 }
 
-export default UserInfo;
+const mapStateToProps = ( state ) => {
+  return {
+    authUser: state.firebase.auth,
+  };
+};
+
+const enhance = compose(
+  withFirebase,
+  connect( mapStateToProps )
+);
+
+export default enhance( UserInfo );

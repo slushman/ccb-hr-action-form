@@ -1,60 +1,38 @@
-import React, { Component } from 'react';
-import { withFirebase } from '../components/Firebase';
+import React from 'react';
+import { firestoreConnect, isLoaded } from 'react-redux-firebase';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
+import { convertToArrayWithFormId } from '../functions';
 import YourFormsTable from '../components/FormTables/YourFormsTable';
 
-class YourFormsContainer extends Component {
-  state = {
-    error: false,
-    forms: [],
-    loading: false,
-  };
-
-  componentDidMount() {
-    this.getForms();
-  }
-
-  getForms = async () => {
-    let formsArray = [];
-
-    const formsRef = await this.props.firebase.db.collection('forms');
-    const currentUserId = this.props.authUser.uid;
-    try {
-      const allFormsSnapshot = await formsRef.where('submitterId', '==', currentUserId).get();
-      allFormsSnapshot.forEach( form => {
-        const formData = form.data();
-        formData.formId = form.id;
-        formsArray.push(formData);
-      })
-    } catch ( error ) {
-      console.log('Error getting documents', error);
-    }
-    this.setState({
-      forms: formsArray,
-      loading: true,
-    });
-    try {
-      this.setState({
-        loading: false,
-      });
-    } catch ( error ) {
-      this.setState({
-        error: true,
-        loading: true,
-      });
-    }
-  }
-  
+class YourFormsContainer extends React.Component {
   render() {
-    if ( 1 > this.state.forms.length ) {
+    if ( ! isLoaded( this.props.forms ) ) {
       return null;
     }
+    const formsArray = convertToArrayWithFormId( this.props.forms );
+    const myForms = formsArray.filter( ( form ) => {
+      return this.props.authUser.uid === form.submitterId;
+    } );
     return (
       <YourFormsTable
-        forms={ this.state.forms }
+        rows={ myForms }
       />
     );
   }
 }
 
-export default withFirebase( YourFormsContainer );
+const mapStateToProps = ( state ) => {
+  return {
+    authUser: state.firebase.auth,
+    forms: state.firestore.data.forms,
+  };
+};
+
+const enhance = compose(
+  firestoreConnect( () => [ 'forms' ] ),
+  connect( mapStateToProps )
+);
+
+export default enhance( YourFormsContainer );

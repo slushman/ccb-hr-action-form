@@ -1,77 +1,42 @@
-import React, { Component, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import { compose } from 'recompose';
+import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withFirebase } from 'react-redux-firebase';
 
-import { AuthUserContext } from '../components/Session';
-import { withFirebase } from '../components/Firebase';
-import { AwaitingApprovalContainer } from '../containers/AwaitingApprovalContainer';
+import { Main, Grid, Wrapper } from '../styles';
+import AwaitingApprovalContainer from '../containers/AwaitingApprovalContainer';
 import YourFormsContainer from '../containers/YourFormsContainer';
 import UserInfo from '../components/UserInfo';
+import NavBar from '../components/Navigation/NavBar';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-});
-
-const Main = styled.main`
-  display: block;
-  margin-left: ${ props => props.theme.spacing.unit * 3 }px;
-  margin-right: ${ props => props.theme.spacing.unit * 3 }px;
-  margin-top: 4em;
-  width: auto;
-  
-  ${ theme.breakpoints.up( 400 + theme.spacing.unit * 3 * 2 ) }{
-    margin-left: auto;
-    margin-right: auto;
-    width: 60rem;
-  }
-`;
-
-const WrappingPaper = styled(Paper)`
-  padding: ${ props => props.theme.spacing.unit * 3}px;
-`;
-
-class Forms extends Component {
-  componentDidMount() {
-    this.props.setTitle('Your Forms');
-  }
-  
+class FormsPage extends React.Component {
   render() {
+    console.log( this.props );
+    const { authUser } = this.props;
     return (
-      <ThemeProvider theme={theme}>
-        <Main>
-          <CssBaseline />
-          <Grid item xs={ 12 }>
-            <WrappingPaper>
-              <AuthUserContext.Consumer>
-                {
-                  authUser => (
-                    <Fragment>
-                      <UserInfo userInfo={authUser.providerData[0]} />
-                      <AwaitingApprovalContainer authUser={authUser} />
-                      <YourFormsContainer authUser={authUser} />
-                    </Fragment>
-                  )
-                }
-              </AuthUserContext.Consumer>
-            </WrappingPaper>
-          </Grid>
-        </Main>
-      </ThemeProvider>
+      <Main>
+        <Grid>
+          <Wrapper>
+            <NavBar pageTitle={ 'Your Forms' } />
+            <UserInfo />
+            <AwaitingApprovalContainer authUser={ authUser } />
+            <YourFormsContainer authUser={ authUser } />
+          </Wrapper>
+        </Grid>
+      </Main>
     );
   }
 }
 
-const FormsPage = compose(
-  withRouter,
-  withFirebase,
-)( Forms );
+const mapStateToProps = ( state ) => {
+  return {
+    authUser: state.firebase.auth,
+  };
+};
 
-export { Forms, FormsPage };
+const enhance = compose(
+  withFirebase,
+  connect( mapStateToProps )
+);
+
+export default enhance( FormsPage );

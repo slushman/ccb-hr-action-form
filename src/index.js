@@ -1,14 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
+import { ConnectedRouter } from 'connected-react-router';
+
+import * as serviceWorker from './serviceWorker';
+import store, { history, reduxFBConfig } from './redux/store';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { Firebase, FirebaseContext } from './components/Firebase';
+import firebase from './firebase';
+
+const reduxFBProps = {
+  firebase,
+  config: reduxFBConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+};
 
 ReactDOM.render(
-  <FirebaseContext.Provider value={new Firebase()}>
-    <App />
-  </FirebaseContext.Provider>,
+  <Provider store={ store }>
+    <ReactReduxFirebaseProvider { ...reduxFBProps }>
+      <ConnectedRouter history={ history }>
+        <App />
+      </ConnectedRouter>
+    </ReactReduxFirebaseProvider>
+  </Provider>,
   document.getElementById('root')
 );
 

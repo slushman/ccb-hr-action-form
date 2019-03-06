@@ -1,6 +1,6 @@
-import { SignInPage } from '../pages/SignInPage';
-import { FormsPage } from '../pages/FormsPage';
-import { NewFormPage } from '../pages/NewFormPage';
+import SignInPage from '../pages/SignInPage';
+import FormsPage from '../pages/FormsPage';
+import NewFormPage from '../pages/NewFormPage';
 import ViewFormPage from '../pages/ViewFormPage';
 
 export const SIGN_IN = '/signin';
