@@ -22,7 +22,6 @@ class SignInPage extends React.Component {
   }
 
   render() {
-    console.log( this.props );
     return (
       <Main>
         <Grid>
