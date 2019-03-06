@@ -1,7 +1,4 @@
 import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withFirebase } from 'react-redux-firebase';
 
 import { Main, Grid, Wrapper } from '../styles';
 import AwaitingApprovalContainer from '../containers/AwaitingApprovalContainer';
@@ -11,16 +8,14 @@ import NavBar from '../components/Navigation/NavBar';
 
 class FormsPage extends React.Component {
   render() {
-    console.log( this.props );
-    const { authUser } = this.props;
     return (
       <Main>
         <Grid>
           <Wrapper>
             <NavBar pageTitle={ 'Your Forms' } />
             <UserInfo />
-            <AwaitingApprovalContainer authUser={ authUser } />
-            <YourFormsContainer authUser={ authUser } />
+            <AwaitingApprovalContainer />
+            <YourFormsContainer />
           </Wrapper>
         </Grid>
       </Main>
@@ -28,15 +23,17 @@ class FormsPage extends React.Component {
   }
 }
 
-const mapStateToProps = ( state ) => {
-  return {
-    authUser: state.firebase.auth,
-  };
-};
+export default FormsPage;
 
-const enhance = compose(
-  withFirebase,
-  connect( mapStateToProps )
-);
+// const mapStateToProps = ( state ) => {
+//   return {
+//     authUser: state.firebase.auth,
+//   };
+// };
 
-export default enhance( FormsPage );
+// const enhance = compose(
+//   withFirebase,
+//   connect( mapStateToProps )
+// );
+
+// export default enhance( FormsPage );

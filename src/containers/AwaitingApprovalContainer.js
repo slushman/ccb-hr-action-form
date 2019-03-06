@@ -37,6 +37,7 @@ class AwaitingApprovalContainer extends React.Component {
     if ( ! isLoaded( this.props.forms ) ) {
       return null;
     }
+    console.log( this.props );
     const formsArray = convertToArrayWithFormId( this.props.forms );
     const myForms = formsArray.filter( ( form ) => {
       return this.props.authUser.uid === form.submitterId;
@@ -53,6 +54,8 @@ class AwaitingApprovalContainer extends React.Component {
 
 const mapStateToProps = ( state ) => {
   return {
+    authUser: state.firebase.auth,
+    firestore: state.firestore,
     forms: state.firestore.data.forms,
   };
 };
