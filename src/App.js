@@ -30,7 +30,8 @@ class App extends React.Component {
             component={ userIsAuthenticated( NewFormPage ) }
             path={ROUTES.NEW_FORM}
           />
-          <Route path={ ROUTES.SIGN_IN } component={ userIsNotAuthenticated( SignInPage ) } title="Sign In" />
+          <Route path={ ROUTES.SIGN_IN } component={ userIsNotAuthenticated( SignInPage ) } />
+          <Route component={ userIsNotAuthenticated( SignInPage ) } />
         </Switch>
       </Router>
     );
