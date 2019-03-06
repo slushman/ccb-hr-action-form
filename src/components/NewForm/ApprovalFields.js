@@ -1,21 +1,17 @@
-import React, { Component, Fragment } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { FastField } from 'formik';
 import Select from '../Fields/Select';
+import Input from '../Fields/Input';
 
-const Fieldset = styled.fieldset`
-  margin-bottom: 1.5em;
-`;
-Fieldset.displayName = 'Fieldset';
-
-const Legend = styled.legend``;
-Legend.displayName = 'Legend';
+import {
+  Fieldset,
+  Legend,
+} from '../../styles';
 
 /**
  * Field group appears for all fields, if requestType has a value.
  */
-class ApprovalFields extends Component {
+class ApprovalFields extends React.Component {
   static propTypes = {
     values: PropTypes.object.isRequired,
   };
@@ -25,18 +21,22 @@ class ApprovalFields extends Component {
     return (
       <Fieldset>
         <Legend>Approvals Needed</Legend>
-        <FastField
+        <Input
+          label="HR"
           name="approvalsHR"
-          type="hidden"
+          readOnly
+          value="sondra-calhoun"
         />
         { ( 'employment' === values.requestType ||
           ( 'talent-acquisition' === values.requestType &&
               'new-position' === values.acquisitionType ) ||
             'add-role' === values.requestType ||
             'leave' === values.requestType ) &&
-          <FastField
+          <Input
+            label="Finance"
             name="approvalsFinance"
-            type="hidden"
+            readOnly
+            value="someone?"
           />
         }
         <Select
@@ -49,7 +49,7 @@ class ApprovalFields extends Component {
             },
             {
               label: 'Amanda Williams',
-              value: 'aamnda-williams',
+              value: 'amanda-williams',
             },
             {
               label: 'Heather Sharp',
@@ -66,9 +66,11 @@ class ApprovalFields extends Component {
              'new-position' === values.acquisitionType ) ||
           'add-role' === values.requestType ||
           'transfer-promotion' === values.requestType ) &&
-          <FastField
+          <Input
+            label="CEO"
             name="approvalsCEO"
-            type="hidden"
+            readOnly
+            value="don-harms"
           />
         }
         { ( 'employment' === values.requestType &&
@@ -76,16 +78,20 @@ class ApprovalFields extends Component {
               'rehire' === values.employmentType )
           ) &&
           (
-            <Fragment>
-              <FastField
+            <React.Fragment>
+              <Input
+                label="IT"
                 name="approvalsIT"
-                type="hidden"
+                readOnly
+                value="joe-donnellon"
               />
-              <FastField
+              <Input
+                label="Facilities"
                 name="approvalsFacilities"
-                type="hidden"
+                readOnly
+                value="john-zabka"
               />
-            </Fragment>
+            </React.Fragment>
           )
         }
       </Fieldset>
