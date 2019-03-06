@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 const TableActionsWrap = styled.div`
   color: ${ props => props.theme.palette.text.secondary };
   flex-shrink: 0;
-  margin-left: ${ props => props.theme.spacing.unit * 2.5 }px;
+  margin-left: 40px;
 `;
 
 class TablePaginationActions extends React.Component {
