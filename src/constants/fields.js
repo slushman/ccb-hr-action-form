@@ -191,6 +191,18 @@ export const fields = [
 		displayOrder: 7,
 	},
 	{
+		key: 'roleNameNew',
+		label: 'New Role',
+		defaultValue: '',
+		displayOrder: 8,
+	},
+	{
+		key: 'roleNamePrevious',
+		label: 'Previous Role',
+		defaultValue: '',
+		displayOrder: 9,
+	},
+	{
 		key: 'salary',
 		label: 'Salary',
 		defaultValue: '',
