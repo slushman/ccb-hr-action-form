@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import dayjs from 'dayjs';
-import { withFirebase } from 'react-redux-firebase';
+import { withFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 
 import { Main, Grid, Wrapper } from '../styles';
@@ -12,50 +12,21 @@ import NewForm from '../components/NewForm/NewForm';
 import NavBar from '../components/Navigation/NavBar';
 import { validationSchema } from '../components/NewForm/validationSchema';
 
-const createApprovalsObj = (values) => {
-  const approvals = {};
-
-  approvals.lt = values.approvalsLT;
-
-  if ( values.approvalsHR ) {
-    approvals.hr = values.approvalsHR;
-    delete values.approvalsHR;
-  }
-
-  if ( values.approvalsFinance ) {
-    approvals.finance = values.approvalsFinance;
-    delete values.approvalsFinance;
-  }
-
-  if ( values.approvalsCEO ) {
-    approvals.ceo = values.approvalsCEO;
-    delete values.approvalsCEO;
-  }
-
-  if ( values.approvalsIT ) {
-    approvals.it = values.approvalsIT;
-    delete values.approvalsIT;
-  }
-
-  if ( values.approvalsFacilities ) {
-    approvals.facilities = values.approvalsFacilities;
-    delete values.approvalsFacilities;
-  }
-
-  return { approvals, values };
-};
-
 class NewFormPage extends React.Component {
 
   handleSubmit = (values, { setSubmitting } ) => {
-    console.log( values );
-    const { approvals, newValues } = createApprovalsObj( values );
-
-    this.props.firebase.push( 'forms',
+    this.props.firestore.add( 'forms',
       {
-        ...newValues,
+        ...values,
+        dateFormStatusCEO: '',
+        dateFormStatusFinance: '',
+        dateFormStatusHR: '',
+        dateFormStatusLT: '',
+        formStatusCEO: '',
+        formStatusFinance: '',
+        formStatusHR: '',
+        formStatusLT: '',
         dateSubmitted: dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' ),
-        approvals: approvals,
       }
     )
     .then(() => {
@@ -68,6 +39,7 @@ class NewFormPage extends React.Component {
   };
 
   render() {
+    console.log( this.props );
     return (
       <Main>
         <Grid>
@@ -144,11 +116,12 @@ class NewFormPage extends React.Component {
 const mapStateToProps = ( state ) => {
   return {
     authUser: state.firebase.auth,
+    firestore: state.firestore,
   };
 };
 
 const enhance = compose(
-  withFirebase,
+  withFirestore,
   withRouter,
   connect( mapStateToProps )
 );
