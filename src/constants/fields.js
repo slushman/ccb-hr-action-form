@@ -48,6 +48,12 @@ export const fields = [
 		displayOrder: 11,
 	},
 	{
+		key: 'dateLeaveEffective',
+		label: 'Leave Effective Date',
+		defaultValue: '',
+		displayOrder: 33,
+	},
+	{
 		key: 'dateLeaveReturn',
 		label: 'Expected Return Date',
 		defaultValue: '',
@@ -56,6 +62,12 @@ export const fields = [
 	{
 		key: 'datePosted',
 		label: 'Date Posted',
+		defaultValue: '',
+		displayOrder: 17,
+	},
+	{
+		key: 'dateRequested',
+		label: 'Date Requested',
 		defaultValue: '',
 		displayOrder: 17,
 	},
