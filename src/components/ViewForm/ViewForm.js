@@ -2,16 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import * as R from 'ramda';
-import styled from 'styled-components';
+import { compose } from 'recompose';
+import { withFirestore } from 'react-redux-firebase';
+import { connect } from 'react-redux';
 
 import { fields } from '../../constants/fields';
-import FormActions from './FormActions';
+import { getStatus } from '../../functions';
 
 import {
-  buttonShadows,
   Heading1,
   Heading2,
   HeaderCell,
+  Paragraph,
   Table,
   TableBody,
   TableCell,
@@ -20,14 +22,6 @@ import {
   TableRow,
   WrappingPaper,
 } from '../../styles';
-
-const ActionBanner = styled.section`
-  ${ buttonShadows }
-  margin-bottom: 1.5em;
-  padding: 16px;
-  text-align: center;
-  width: 100%;
-`;
 
 const getFieldInfo = (key) => R.find( R.propEq( 'key', key ) )( fields );
 
@@ -55,7 +49,7 @@ class ViewForm extends React.Component {
   componentDidMount() {
     const { form } = this.props;
     let fieldData = R.filter( R.compose( R.not, R.isEmpty), form ); // Remove empty fields
-    const removeTheseFields = ['dateFormStatusCEO','dateFormStatusFinance','dateFormStatusHR','dateFormStatusLT','dateSubmitted','formId','formName','formStatus','formStatusCEO','formStatusFinance','formStatusHR','formStatusLT','submitterId' ];
+    const removeTheseFields = ['approvals','dateSubmitted','formId','formName','responses','submitterId' ];
     fieldData = R.omit( removeTheseFields, fieldData ); // removes the specific fields
     fieldData =  Object.entries( fieldData ).map( ( field ) => { // adds the displayOrder for each field
       const fieldInfo = getFieldInfo(field[0]);
@@ -71,15 +65,10 @@ class ViewForm extends React.Component {
     if ( 1 > this.state.data.length ) {
       return null;
     }
-    console.log( this.props.form );
     return (
       <React.Fragment>
         <Heading1>{ this.props.form.formName }</Heading1>
-        { 'Approved' !== this.props.form.formStatus && 'Denied' !== this.props.form.formStatus &&
-          <ActionBanner>
-            <FormActions formInfo={ this.props.form } />
-          </ActionBanner>
-        }
+        <Paragraph>Submitted: { dayjs( this.props.form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</Paragraph>
 
         <Heading2>Form Fields</Heading2>
           <WrappingPaper>
@@ -94,7 +83,7 @@ class ViewForm extends React.Component {
               {
                 this.state.data.map((field,i) => {
                   const fieldInfo = R.find(R.propEq('key', field[0]))(fields);
-                  const formattedData = maybeFormatDate( field[1], field[0] );
+                  let formattedData = maybeFormatDate( field[1], field[0] );
                   return (
                     <TableRow key={ i }>
                       <TableCell>{ fieldInfo.label }</TableCell>
@@ -107,7 +96,7 @@ class ViewForm extends React.Component {
           </Table>
         </WrappingPaper>
 
-        <Heading2>Form Status</Heading2>
+        <Heading2>Form Responses</Heading2>
         <WrappingPaper>
           <Table>
             <TableHead>
@@ -115,51 +104,21 @@ class ViewForm extends React.Component {
                 <HeaderCell component="th">Field Name</HeaderCell>
                 <HeaderCell component="th">Date</HeaderCell>
                 <HeaderCell component="th">Status</HeaderCell>
+                <HeaderCell component="th">Contact</HeaderCell>
               </TableHeadRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell>Date Submitted</TableCell>
-                <TableCell>{ dayjs( this.props.form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                <TableCell>{ this.props.form.formStatus }</TableCell>
-              </TableRow>
-              { '' !== this.props.form.dateFormStatusHR && '' !== this.props.form.formStatusHR &&
-                <TableRow>
-                  <TableCell>HR</TableCell>
-                  <TableCell>{ dayjs( this.props.form.dateFormStatusHR, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                  <TableCell>{ this.props.form.formStatusHR }</TableCell>
-                </TableRow>
+              { 
+                this.props.form.responses && 
+                  Object.entries(this.props.form.responses).map( ( response, i ) => (
+                      <TableRow key={ i }>
+                        <TableCell>{ response[0] }</TableCell>
+                        <TableCell>{ response[1].dateResponse ? dayjs( response[1].dateResponse, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) : '' }</TableCell>
+                        <TableCell>{ getStatus( response[1] ) }</TableCell>
+                        <TableCell>{ response[1].contact }</TableCell>
+                      </TableRow>
+                  ) )
               }
-              { '' !== this.props.form.dateFormStatusFinance && '' !== this.props.form.formStatusFinance &&
-                <TableRow>
-                  <TableCell>Finance</TableCell>
-                  <TableCell>{ dayjs( this.props.form.dateFormStatusFinance, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                  <TableCell>{ this.props.form.formStatusFinance }</TableCell>
-                </TableRow>
-              }
-              { '' !== this.props.form.dateFormStatusLT && '' !== this.props.form.formStatusLT &&
-                <TableRow>
-                  <TableCell>Leadership</TableCell>
-                  <TableCell>{ dayjs( this.props.form.dateFormStatusLT, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                  <TableCell>{ this.props.form.formStatusLT }</TableCell>
-                </TableRow>
-              }
-              { '' !== this.props.form.dateFormStatusCEO && '' !== this.props.form.formStatusCEO &&
-                <TableRow>
-                  <TableCell>CEO</TableCell>
-                  <TableCell>{ dayjs( this.props.form.dateFormStatusCEO, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                  <TableCell>{ this.props.form.formStatusCEO }</TableCell>
-                </TableRow>
-              }
-              {/*
-                form.approvals.map((approval,i) => {
-                  return(
-                  <TableRow key={ i }>
-                    <TableCell>{ approval.type }</TableCell>
-                    <TableCell>{ dayjs( approval.timestamp, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
-                  </TableRow>
-                )})
-                  */}
             </TableBody>
           </Table>
         </WrappingPaper>
@@ -168,4 +127,15 @@ class ViewForm extends React.Component {
   }
 }
 
-export default ViewForm;
+const mapStateToProps = ( state ) => {
+  return {
+    firestore: state.firestore,
+  };
+};
+
+const enhance = compose(
+  withFirestore,
+  connect( mapStateToProps )
+);
+
+export default enhance( ViewForm );
