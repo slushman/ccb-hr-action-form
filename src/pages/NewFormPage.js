@@ -2,9 +2,9 @@ import React from 'react';
 import { Formik } from 'formik';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import dayjs from 'dayjs';
 import { withFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { Main, Grid, Wrapper } from '../styles';
 import * as ROUTES from '../constants/routes';
@@ -12,20 +12,58 @@ import NewForm from '../components/NewForm/NewForm';
 import NavBar from '../components/Navigation/NavBar';
 import { validationSchema } from '../components/NewForm/validationSchema';
 
+const getApprovalFields = ( values ) => {
+
+  values.responses.LT.response = '';
+  values.responses.LT.dateResponse = '';
+  values.responses.HR = {};
+  values.responses.HR.contact = 'scalhoun@churchcommunitybuilder.com';
+  values.responses.HR.response = '';
+  values.responses.HR.dateResponse = '';
+
+  if ( 
+    'employment' === values.requestType
+    ||
+    (
+      'talent-acquisition' === values.requestType
+      && 'new-position' === values.acquisitionType
+    )
+    || 'add-role' === values.requestType
+    || 'leave' === values.requestType
+  ) {
+    values.responses.FIN = {};
+    values.responses.FIN.contact = 'someone?@churchcommunitybuilder.com';
+    values.responses.FIN.response = '';
+    values.responses.FIN.dateResponse = '';
+  }
+
+  if ( 
+    (
+      'talent-acquisition' === values.requestType
+      && 'new-position' === values.acquisitionType
+    ) 
+    || 'add-role' === values.requestType
+    || 'transfer-promotion' === values.requestType
+  ) {
+    values.responses.CEO = {};
+    values.responses.CEO.contact = 'dharms@churchcommunitybuilder.com';
+    values.responses.CEO.response = '';
+    values.responses.CEO.dateResponse = '';
+  }
+
+  return values;
+}
+
 class NewFormPage extends React.Component {
 
   handleSubmit = (values, { setSubmitting } ) => {
-    this.props.firestore.add( 'forms',
+
+    const newValues = getApprovalFields( values );
+
+    console.log( newValues );
+    this.props.firebase.firestore().collection('forms').add(
       {
-        ...values,
-        dateFormStatusCEO: '',
-        dateFormStatusFinance: '',
-        dateFormStatusHR: '',
-        dateFormStatusLT: '',
-        formStatusCEO: '',
-        formStatusFinance: '',
-        formStatusHR: '',
-        formStatusLT: '',
+        ...newValues,
         dateSubmitted: dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' ),
       }
     )
@@ -49,12 +87,6 @@ class NewFormPage extends React.Component {
               initialValues={
                 {
                   acquisitionType: '',
-                  approvalsCEO: 'don-harms',
-                  approvalsFacilities: 'john-zabka',
-                  approvalsFinance: 'someone?',
-                  approvalsHR: 'sondra-calhoun',
-                  approvalsIT: 'joe-donnellon',
-                  approvalsLT: '',
                   comments: '',
                   dateBirth: '',
                   dateClosed: '',
