@@ -52,6 +52,7 @@ export const CenteredGrid = styled.div`
   display: flex;
   flex-wrap: nowrap;
   margin: -8px;
+  margin-bottom: 1.5em;
   width: calc( 100% + 16px );
 `;
 
