@@ -6,40 +6,10 @@ export const fields = [
 		displayOrder: 3,
 	},
 	{
-		key: 'approvals',
-		label: 'Approvals',
-		defaultValue: '',
-		displayOrder: 38,
-	},
-	{
 		key: 'comments',
 		label: 'Comments',
 		defaultValue: '',
 		displayOrder: 37,
-	},
-	{
-		key: 'dateFormStatusCEO',
-		label: 'CEO Form Status Date',
-		defaultValue: '',
-		displayOrder: 43,
-	},
-	{
-		key: 'dateFormStatusFinance',
-		label: 'Finance Form Status Date',
-		defaultValue: '',
-		displayOrder: 41,
-	},
-	{
-		key: 'dateFormStatusHR',
-		label: 'HR Form Status Date',
-		defaultValue: '',
-		displayOrder: 40,
-	},
-	{
-		key: 'dateFormStatusLT',
-		label: 'Leadership Team Form Status Date',
-		defaultValue: '',
-		displayOrder: 42,
 	},
 	{
 		key: 'dateBirth',
@@ -136,42 +106,6 @@ export const fields = [
 		label: 'Form Name',
 		defaultValue: '',
 		displayOrder: null,
-	},
-	{
-		key: 'formStatus',
-		label: 'Form Status',
-		defaultValue: '',
-		displayOrder: 39,
-	},
-	{
-		key: 'formStatusCEO',
-		label: 'CEO Form Status',
-		defaultValue: '',
-		displayOrder: 48,
-	},
-	{
-		key: 'formStatusHR',
-		label: 'HR Form Status',
-		defaultValue: '',
-		displayOrder: 45,
-	},
-	{
-		key: 'formStatusFinance',
-		label: 'Finance Form Status',
-		defaultValue: '',
-		displayOrder: 46,
-	},
-	{
-		key: 'formStatusLT',
-		label: 'LT Form Status',
-		defaultValue: '',
-		displayOrder: 47,
-	},
-	{
-		key: 'formStatusBy',
-		label: 'Form Status Updated By',
-		defaultValue: '',
-		displayOrder: 40,
 	},
 	{
 		key: 'hiringLead',

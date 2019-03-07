@@ -314,7 +314,7 @@ export const forms = [
         timestamp: '2019-02-02T13:00',
       },
       {
-        type: 'Finance',
+        type: 'FIN',
         timestamp: '2019-02-02T14:00',
       },
       {
