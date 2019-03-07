@@ -65,12 +65,7 @@ class AwaitingApprovalTable extends React.Component {
               <TableBody>
                 {
                   rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => (
-                    <AwaitingFormsRow
-                      handleApproval={ this.props.handleApproval }
-                      handleDenial={ this.props.handleDenial }
-                      key={ i }
-                      row={ row }
-                    />
+                    <AwaitingFormsRow key={ i } row={ row } />
                   ))
                 }
                 <EmptyRow emptyRows={ emptyRows } />

@@ -4,7 +4,7 @@ import { Main, Grid, Wrapper } from '../styles';
 import ViewFormContainer from '../containers/ViewFormContainer';
 import NavBar from '../components/Navigation/NavBar';
 
-class ViewFormPage extends React.Component {  
+class ViewFormPage extends React.Component {
   render() {
     return (
       <Main>
