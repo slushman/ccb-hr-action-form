@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from '../Fields/Select';
-import Input from '../Fields/Input';
 
 import {
   Fieldset,
@@ -17,83 +16,51 @@ class ApprovalFields extends React.Component {
   };
 
   render() {
-    const { values } = this.props;
     return (
       <Fieldset>
         <Legend>Approvals Needed</Legend>
-        <Input
-          label="HR"
-          name="approvalsHR"
-          readOnly
-          value="sondra-calhoun"
-        />
-        { ( 'employment' === values.requestType ||
-          ( 'talent-acquisition' === values.requestType &&
-              'new-position' === values.acquisitionType ) ||
-            'add-role' === values.requestType ||
-            'leave' === values.requestType ) &&
-          <Input
-            label="Finance"
-            name="approvalsFinance"
-            readOnly
-            value="someone?"
-          />
-        }
         <Select
           label="Leadership Team"
-          name="approvalsLT"
+          name="responses.LT.contact"
           options={[
             {
               label: 'Aaron Senneff',
-              value: 'aaron-senneff',
+              value: 'asenneff@churchcommunitybuilder.com',
             },
             {
               label: 'Amanda Williams',
-              value: 'amanda-williams',
+              value: 'awilliams@churchcommunitybuilder.com',
             },
             {
               label: 'Heather Sharp',
-              value: 'heather-sharp',
+              value: 'hsharp@churchcommunitybuilder.com',
             },
             {
               label: 'Jeff Otero',
-              value: 'jeff-otero',
+              value: 'jotero@churchcommunitybuilder.com',
             },
           ]}
           placeholder="Select leadership team member"
         />
-        { ( ( 'talent-acquisition' === values.requestType &&
-             'new-position' === values.acquisitionType ) ||
-          'add-role' === values.requestType ||
-          'transfer-promotion' === values.requestType ) &&
-          <Input
-            label="CEO"
-            name="approvalsCEO"
-            readOnly
-            value="don-harms"
-          />
-        }
-        { ( 'employment' === values.requestType &&
+        {/* { ( 'employment' === values.requestType &&
             ( 'new-hire' === values.employmentType ||
               'rehire' === values.employmentType )
           ) &&
           (
             <React.Fragment>
               <Input
-                label="IT"
                 name="approvalsIT"
-                readOnly
-                value="joe-donnellon"
+                type="hidden"
+                value="jdonnellon@churchcommunitybuilder.com"
               />
               <Input
-                label="Facilities"
                 name="approvalsFacilities"
-                readOnly
-                value="john-zabka"
+                type="hidden"
+                value="jzabka@churchcommunitybuilder.com"
               />
             </React.Fragment>
           )
-        }
+        } */}
       </Fieldset>
     );
   }
