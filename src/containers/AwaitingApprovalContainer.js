@@ -12,6 +12,8 @@ class AwaitingApprovalContainer extends React.Component {
       return null;
     }
     const formsArray = convertToArrayWithFormId( this.props.forms );
+
+    // @TODO: Fix filter here to only show forms that are waiting for your approval
     const awaitingForms = formsArray.filter( ( form ) => {
       return 'Approved' !== form.formStatus && 'Denied' !== form.formStatus;
     } );
