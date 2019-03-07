@@ -55,7 +55,7 @@ class ViewForm extends React.Component {
   componentDidMount() {
     const { form } = this.props;
     let fieldData = R.filter( R.compose( R.not, R.isEmpty), form ); // Remove empty fields
-    const removeTheseFields = [ 'approvals','dateSubmitted','formId','formName','formStatus','submitterId' ];
+    const removeTheseFields = ['dateFormStatusCEO','dateFormStatusFinance','dateFormStatusHR','dateFormStatusLT','dateSubmitted','formId','formName','formStatus','formStatusCEO','formStatusFinance','formStatusHR','formStatusLT','submitterId' ];
     fieldData = R.omit( removeTheseFields, fieldData ); // removes the specific fields
     fieldData =  Object.entries( fieldData ).map( ( field ) => { // adds the displayOrder for each field
       const fieldInfo = getFieldInfo(field[0]);
@@ -71,9 +71,10 @@ class ViewForm extends React.Component {
     if ( 1 > this.state.data.length ) {
       return null;
     }
+    console.log( this.props.form );
     return (
       <React.Fragment>
-        <Heading1>{ this.props.formName }</Heading1>
+        <Heading1>{ this.props.form.formName }</Heading1>
         { 'Approved' !== this.props.form.formStatus && 'Denied' !== this.props.form.formStatus &&
           <ActionBanner>
             <FormActions formInfo={ this.props.form } />
@@ -112,18 +113,44 @@ class ViewForm extends React.Component {
             <TableHead>
               <TableHeadRow>
                 <HeaderCell component="th">Field Name</HeaderCell>
-                <HeaderCell component="th">Field Value</HeaderCell>
+                <HeaderCell component="th">Date</HeaderCell>
+                <HeaderCell component="th">Status</HeaderCell>
               </TableHeadRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Form Status</TableCell>
-                <TableCell>{ this.props.form.formStatus }</TableCell>
-              </TableRow>
-              <TableRow>
                 <TableCell>Date Submitted</TableCell>
                 <TableCell>{ dayjs( this.props.form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                <TableCell>{ this.props.form.formStatus }</TableCell>
               </TableRow>
+              { '' !== this.props.form.dateFormStatusHR && '' !== this.props.form.formStatusHR &&
+                <TableRow>
+                  <TableCell>HR</TableCell>
+                  <TableCell>{ dayjs( this.props.form.dateFormStatusHR, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                  <TableCell>{ this.props.form.formStatusHR }</TableCell>
+                </TableRow>
+              }
+              { '' !== this.props.form.dateFormStatusFinance && '' !== this.props.form.formStatusFinance &&
+                <TableRow>
+                  <TableCell>Finance</TableCell>
+                  <TableCell>{ dayjs( this.props.form.dateFormStatusFinance, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                  <TableCell>{ this.props.form.formStatusFinance }</TableCell>
+                </TableRow>
+              }
+              { '' !== this.props.form.dateFormStatusLT && '' !== this.props.form.formStatusLT &&
+                <TableRow>
+                  <TableCell>Leadership</TableCell>
+                  <TableCell>{ dayjs( this.props.form.dateFormStatusLT, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                  <TableCell>{ this.props.form.formStatusLT }</TableCell>
+                </TableRow>
+              }
+              { '' !== this.props.form.dateFormStatusCEO && '' !== this.props.form.formStatusCEO &&
+                <TableRow>
+                  <TableCell>CEO</TableCell>
+                  <TableCell>{ dayjs( this.props.form.dateFormStatusCEO, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</TableCell>
+                  <TableCell>{ this.props.form.formStatusCEO }</TableCell>
+                </TableRow>
+              }
               {/*
                 form.approvals.map((approval,i) => {
                   return(
