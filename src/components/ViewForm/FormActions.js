@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 
 import {
   ApproveButton,
@@ -17,31 +18,31 @@ class FormActions extends React.Component {
   };
 
   handleApproval = () => {
-    const { formInfo } = this.props;
-    const currentUser = this.props.authUser;
-    console.log({ formInfo, currentUser });
-    const docRef = this.props.firebase.db.collection('forms').doc(formInfo.formId);
-
-    // who should be next in the chain?
-    // should this approval message then show "waiting on {next person}"?
-
-    docRef.update({formStatus: formInfo.formStatus + 1});
-    docRef.update({formStatusBy: currentUser.uid});
-
-    // write to Firestore on the form object
-    // add an approval in the approvals array
-    // change status to waiting for ...next role
+    const { firebase, formInfo } = this.props;
+    const docRef = firebase.firestore().collection('forms').doc(formInfo.formId);
+    const responseUpdate = {};
+    responseUpdate[`responses.HR.response`] = 'approved';
+    responseUpdate[`responses.HR.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
+    docRef.update( responseUpdate )
+    .then(() => {
+      setTimeout(() => {
+        alert('Form approved!');
+      }, 250)
+    })
   }
 
   handleDenial = () => {
-    const { formInfo } = this.props;
-    const currentUser = this.props.authUser;
-    const docRef = this.props.firebase.db.collection('forms').doc(formInfo.formId);
-    // what else should happen here?
-    docRef.update({formStatus: 'Denied'});
-    docRef.update({formStatusBy: currentUser.uid});
-    // write to Firestore
-    // change status to denied
+    const { firebase, formInfo } = this.props;
+    const docRef = firebase.firestore().collection('forms').doc(formInfo.formId);
+    const responseUpdate = {};
+    responseUpdate[`responses.HR.response`] = 'denied';
+    responseUpdate[`responses.HR.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
+    docRef.update( responseUpdate )
+    .then(() => {
+      setTimeout(() => {
+        alert('Form denied!');
+      }, 250)
+    })
   }
 
   render() {
