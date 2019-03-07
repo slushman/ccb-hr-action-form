@@ -23,6 +23,11 @@ const InputElement = styled(FastField)`
   margin-bottom: 1.5em;
   padding: 0.5rem;
   width: 100%;
+
+  &[readonly] {
+    background-color: #ddd;
+    color: #777;
+  }
 `;
 InputElement.displayName = 'InputElement';
 
