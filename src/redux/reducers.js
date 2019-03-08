@@ -6,5 +6,5 @@ import { connectRouter } from 'connected-react-router';
 export default ( history ) => combineReducers( {
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  router: connectRouter( history )
+  router: connectRouter( history ),
 } );
