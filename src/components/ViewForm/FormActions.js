@@ -5,11 +5,35 @@ import { compose } from 'recompose';
 import { withFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import dayjs from 'dayjs';
+import * as EMAILS from '../../constants/emails';
 
 import {
   ApproveButton,
   DenyButton,
 } from '../../styles';
+
+const getResponseType = (currentUser) => {
+  switch ( currentUser.email ) {
+    case 'cwilcoxson@gmail.com':
+      return 'LT';
+    case EMAILS.AARONSENNEFF:
+      return 'LT';
+    case EMAILS.AMANDAWILLIAMS:
+      return 'LT';
+    case EMAILS.HEATHERSHARP:
+      return 'LT';
+    case EMAILS.JEFFOTERO:
+      return 'LT';
+    case EMAILS.DONHARMS:
+      return 'CEO';
+    case EMAILS.SONDRACALHOUN:
+      return 'HR';
+    case EMAILS.FINANCE:
+      return 'FIN';
+    default:
+      return '';
+  }
+};
 
 class FormActions extends React.Component {
 
@@ -21,8 +45,9 @@ class FormActions extends React.Component {
     const { firebase, formInfo } = this.props;
     const docRef = firebase.firestore().collection('forms').doc(formInfo.formId);
     const responseUpdate = {};
-    responseUpdate[`responses.HR.response`] = 'approved';
-    responseUpdate[`responses.HR.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
+    const responseType = getResponseType(this.props.authUser);
+    responseUpdate[`responses.${ responseType }.response`] = 'approved';
+    responseUpdate[`responses.${ responseType }.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
     docRef.update( responseUpdate )
     .then(() => {
       setTimeout(() => {
@@ -35,8 +60,9 @@ class FormActions extends React.Component {
     const { firebase, formInfo } = this.props;
     const docRef = firebase.firestore().collection('forms').doc(formInfo.formId);
     const responseUpdate = {};
-    responseUpdate[`responses.HR.response`] = 'denied';
-    responseUpdate[`responses.HR.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
+    const responseType = getResponseType(this.props.authUser);
+    responseUpdate[`responses.${ responseType }.response`] = 'denied';
+    responseUpdate[`responses.${ responseType }.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
     docRef.update( responseUpdate )
     .then(() => {
       setTimeout(() => {

@@ -11,13 +11,14 @@ import * as ROUTES from '../constants/routes';
 import NewForm from '../components/NewForm/NewForm';
 import NavBar from '../components/Navigation/NavBar';
 import { validationSchema } from '../components/NewForm/validationSchema';
+import * as EMAILS from '../constants/emails';
 
 const getApprovalFields = ( values ) => {
 
   values.responses.LT.response = '';
   values.responses.LT.dateResponse = '';
   values.responses.HR = {};
-  values.responses.HR.contact = 'scalhoun@churchcommunitybuilder.com';
+  values.responses.HR.contact = EMAILS.SONDRACALHOUN;
   values.responses.HR.response = '';
   values.responses.HR.dateResponse = '';
 
@@ -32,7 +33,7 @@ const getApprovalFields = ( values ) => {
     || 'leave' === values.requestType
   ) {
     values.responses.FIN = {};
-    values.responses.FIN.contact = 'someone?@churchcommunitybuilder.com';
+    values.responses.FIN.contact = EMAILS.FINANCE;
     values.responses.FIN.response = '';
     values.responses.FIN.dateResponse = '';
   }
@@ -46,7 +47,7 @@ const getApprovalFields = ( values ) => {
     || 'transfer-promotion' === values.requestType
   ) {
     values.responses.CEO = {};
-    values.responses.CEO.contact = 'dharms@churchcommunitybuilder.com';
+    values.responses.CEO.contact = EMAILS.DONHARMS;
     values.responses.CEO.response = '';
     values.responses.CEO.dateResponse = '';
   }

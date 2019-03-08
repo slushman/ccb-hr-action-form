@@ -6,6 +6,7 @@ import {
   Fieldset,
   Legend,
 } from '../../styles';
+import * as EMAILS from '../../constants/emails';
 
 /**
  * Field group appears for all fields, if requestType has a value.
@@ -25,19 +26,23 @@ class ApprovalFields extends React.Component {
           options={[
             {
               label: 'Aaron Senneff',
-              value: 'asenneff@churchcommunitybuilder.com',
+              value: EMAILS.AARONSENNEFF,
             },
             {
               label: 'Amanda Williams',
-              value: 'awilliams@churchcommunitybuilder.com',
+              value: EMAILS.AMANDAWILLIAMS,
             },
             {
               label: 'Heather Sharp',
-              value: 'hsharp@churchcommunitybuilder.com',
+              value: EMAILS.HEATHERSHARP,
             },
             {
               label: 'Jeff Otero',
-              value: 'jotero@churchcommunitybuilder.com',
+              value: EMAILS.JEFFOTERO,
+            },
+            {
+              label: 'Chris Wilcoxson',
+              value: 'cwilcoxson@gmail.com',
             },
           ]}
           placeholder="Select leadership team member"
