@@ -49,7 +49,7 @@ class ViewForm extends React.Component {
   componentDidMount() {
     const { form } = this.props;
     let fieldData = R.filter( R.compose( R.not, R.isEmpty), form ); // Remove empty fields
-    const removeTheseFields = ['approvals','dateSubmitted','formId','formName','responses','submitterId' ];
+    const removeTheseFields = ['dateSubmitted','formId','formName','responses','submitterId' ];
     fieldData = R.omit( removeTheseFields, fieldData ); // removes the specific fields
     fieldData =  Object.entries( fieldData ).map( ( field ) => { // adds the displayOrder for each field
       const fieldInfo = getFieldInfo(field[0]);
