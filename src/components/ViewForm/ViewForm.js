@@ -69,14 +69,15 @@ class ViewForm extends React.Component {
     if ( 1 > this.state.data.length ) {
       return null;
     }
+    const { form } = this.props;
     return (
       <React.Fragment>
         {
           this.state.waiting &&
-            <ActionBanner />
+            <ActionBanner formInfo={ form } />
         }
-        <Heading1>{ this.props.form.formName }</Heading1>
-        <Paragraph>Submitted: { dayjs( this.props.form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</Paragraph>
+        <Heading1>{ form.formName }</Heading1>
+        <Paragraph>Submitted: { dayjs( form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</Paragraph>
 
         <Heading2>Form Fields</Heading2>
           <WrappingPaper>
@@ -117,8 +118,8 @@ class ViewForm extends React.Component {
             </TableHead>
             <TableBody>
               { 
-                this.props.form.responses && 
-                  Object.entries(this.props.form.responses).map( ( response, i ) => (
+                form.responses && 
+                  Object.entries( form.responses ).map( ( response, i ) => (
                       <TableRow key={ i }>
                         <TableCell>{ response[0] }</TableCell>
                         <TableCell>{ response[1].dateResponse ? dayjs( response[1].dateResponse, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) : '' }</TableCell>

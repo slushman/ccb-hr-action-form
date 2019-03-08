@@ -6,7 +6,7 @@ class ActionBanner extends React.Component {
   render() {
     return (
       <Banner>
-        <FormActions />
+        <FormActions formInfo={ this.props.formInfo } />
       </Banner>
     )
   }
