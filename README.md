@@ -23,7 +23,7 @@ React app that allows leaders within CCB to post an HR action form.
 
 
 ## TODO
-* Approve/deny on ViewForm should re-render form and make the ActionBanner go away.
+* Change alerts to notification banner.
 * Send notification on form submission to Slack.
 * Get response from Slack, save to Firebase DB.
 * Send additional notifications to Slack based on previous Slack responses.
