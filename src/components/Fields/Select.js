@@ -49,11 +49,11 @@ class Select extends React.Component {
           name={name}
         >
           <option value="">{placeholder}</option>
-          { 
-          options.map((option,i) => (
-            <option key={i} value={option.value}>{option.label}</option>
-          ))
-        }
+          {
+            options.map((option,i) => (
+              <option key={i} value={option.value}>{option.label}</option>
+            ))
+          }
         </StyledSelect>
       </SelectWrap>
     );
