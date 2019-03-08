@@ -56,6 +56,12 @@ export const CenteredGrid = styled.div`
   width: calc( 100% + 16px );
 `;
 
+export const Banner = styled(CenteredGrid)`
+  ${ buttonShadows }
+  justify-content: center;
+  padding: 16px;
+`;
+
 export const DenyButton = styled.button`
   ${ buttonStyles }
   ${ buttonShadows }
