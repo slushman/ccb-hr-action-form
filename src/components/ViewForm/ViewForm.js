@@ -7,7 +7,8 @@ import { withFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 
 import { fields } from '../../constants/fields';
-import { getStatus } from '../../functions';
+import { getStatus, waitingOnMe } from '../../functions';
+import ActionBanner from './ActionBanner';
 
 import {
   Heading1,
@@ -44,10 +45,11 @@ class ViewForm extends React.Component {
 
   state = {
     data: [],
+    waiting: false,
   };
 
   componentDidMount() {
-    const { form } = this.props;
+    const { authUser, form } = this.props;
     let fieldData = R.filter( R.compose( R.not, R.isEmpty), form ); // Remove empty fields
     const removeTheseFields = ['dateSubmitted','formId','formName','responses','submitterId' ];
     fieldData = R.omit( removeTheseFields, fieldData ); // removes the specific fields
@@ -56,8 +58,10 @@ class ViewForm extends React.Component {
       return { ...field, displayOrder: fieldInfo.displayOrder };
     } );
     fieldData = sortByDisplayOrder( fieldData ); // sorts by displayOrder
+    const isWaitingOnMe = waitingOnMe( form, authUser );
     this.setState( {
       data: fieldData,
+      waiting: isWaitingOnMe,
     } );
   }
 
@@ -67,6 +71,10 @@ class ViewForm extends React.Component {
     }
     return (
       <React.Fragment>
+        {
+          this.state.waiting &&
+            <ActionBanner />
+        }
         <Heading1>{ this.props.form.formName }</Heading1>
         <Paragraph>Submitted: { dayjs( this.props.form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</Paragraph>
 
@@ -129,6 +137,7 @@ class ViewForm extends React.Component {
 
 const mapStateToProps = ( state ) => {
   return {
+    authUser: state.firebase.auth,
     firestore: state.firestore,
   };
 };
