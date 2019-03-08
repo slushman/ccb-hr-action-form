@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Main, Grid, Wrapper } from '../styles';
-import AwaitingApprovalContainer from '../containers/AwaitingApprovalContainer';
+import AwaitingResponseContainer from '../containers/AwaitingResponseContainer';
 import YourFormsContainer from '../containers/YourFormsContainer';
 import UserInfo from '../components/UserInfo';
 import NavBar from '../components/Navigation/NavBar';
@@ -14,7 +14,7 @@ class FormsPage extends React.Component {
           <Wrapper>
             <NavBar pageTitle={ 'Your Forms' } />
             <UserInfo />
-            <AwaitingApprovalContainer />
+            <AwaitingResponseContainer />
             <YourFormsContainer />
           </Wrapper>
         </Grid>

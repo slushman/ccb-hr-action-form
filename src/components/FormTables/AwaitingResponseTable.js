@@ -19,7 +19,7 @@ import {
   WrappingPaper,
 } from '../../styles';
 
-class AwaitingApprovalTable extends React.Component {
+class AwaitingResponseTable extends React.Component {
 
   static propTypes = {
     rows: PropTypes.array.isRequired,
@@ -90,4 +90,4 @@ class AwaitingApprovalTable extends React.Component {
   }
 }
 
-export default AwaitingApprovalTable;
+export default AwaitingResponseTable;

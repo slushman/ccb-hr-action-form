@@ -8,7 +8,7 @@ import {
   convertToArrayWithFormId,
   waitingOnMe,
 } from '../functions';
-import AwaitingApprovalTable from '../components/FormTables/AwaitingApprovalTable';
+import AwaitingResponseTable from '../components/FormTables/AwaitingResponseTable';
 import {
   Grid,
   Heading2,
@@ -17,7 +17,7 @@ import {
 
 const NoForms = () => (
   <div style={ { marginBottom: '3em' } }>
-    <Paragraph>You have no forms waiting for your approval.</Paragraph>
+    <Paragraph>You have no forms waiting for your response.</Paragraph>
   </div>
 );
 
@@ -38,11 +38,11 @@ class AwaitingApprovalContainer extends React.Component {
 
     return (
       <Grid>
-        <Heading2>Forms waiting for your approval</Heading2>
+        <Heading2>Forms waiting for your response</Heading2>
           {
             0 === myAwaitingForms.length
               ? <NoForms />
-              : <AwaitingApprovalTable rows={ myAwaitingForms } />
+              : <AwaitingResponseTable rows={ myAwaitingForms } />
           }
       </Grid>
     );
