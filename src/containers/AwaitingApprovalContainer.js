@@ -9,6 +9,17 @@ import {
   waitingOnMe,
 } from '../functions';
 import AwaitingApprovalTable from '../components/FormTables/AwaitingApprovalTable';
+import {
+  Grid,
+  Heading2,
+  Paragraph,
+} from '../styles';
+
+const NoForms = () => (
+  <div style={ { marginBottom: '3em' } }>
+    <Paragraph>You have no forms waiting for your approval.</Paragraph>
+  </div>
+);
 
 class AwaitingApprovalContainer extends React.Component {
   render() {
@@ -20,14 +31,20 @@ class AwaitingApprovalContainer extends React.Component {
     const formsArray = convertToArrayWithFormId( this.props.forms ); // convert forms to an array
 
     const formsWaitingOnMe = (form) => waitingOnMe( form, this.props.authUser );
-    const myAwaitingForms = R.filter( formsWaitingOnMe, formsArray );
+    let myAwaitingForms = R.filter( formsWaitingOnMe, formsArray );
 
-    if ( 0 === myAwaitingForms.length ) {
-      return null;
-    }
+    const descDate = R.descend( R.prop( 'dateSubmitted' ) ); // sort descending
+    myAwaitingForms = R.sort( descDate, myAwaitingForms ); // sort myAwaitingForms descending by submission date.
 
     return (
-      <AwaitingApprovalTable rows={ myAwaitingForms } />
+      <Grid>
+        <Heading2>Forms waiting for your approval</Heading2>
+          {
+            0 === myAwaitingForms.length
+              ? <NoForms />
+              : <AwaitingApprovalTable rows={ myAwaitingForms } />
+          }
+      </Grid>
     );
   }
 };

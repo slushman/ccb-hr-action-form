@@ -6,6 +6,18 @@ import * as R from 'ramda';
 
 import { convertToArrayWithFormId } from '../functions';
 import YourFormsTable from '../components/FormTables/YourFormsTable';
+import {
+  Grid,
+  Heading2,
+  Paragraph,
+  WrappingPaper,
+} from '../styles';
+
+const NoForms = () => (
+  <div>
+    <Paragraph>You have no submitted forms.</Paragraph>
+  </div>
+);
 
 class YourFormsContainer extends React.Component {
   render() {
@@ -15,16 +27,20 @@ class YourFormsContainer extends React.Component {
     const formsArray = convertToArrayWithFormId( this.props.forms );
 
     const isThisMyForm = (form) => this.props.authUser.uid === form.submitterId; // Does the submitterId match the current user id?
-    const myForms = R.filter( isThisMyForm, formsArray ); // Return just the matching forms
+    let myForms = R.filter( isThisMyForm, formsArray ); // Return just the matching forms
 
-    if ( 0 === myForms.length ) {
-      return null;
-    }
+    const descDate = R.descend( R.prop( 'dateSubmitted' ) ); // sort descending
+    myForms = R.sort( descDate, myForms ); // sort myForms descending by submission date.
 
     return (
-      <YourFormsTable
-        rows={ myForms }
-      />
+      <Grid>
+        <Heading2>Your Forms</Heading2>
+        {
+          0 === myForms.length
+            ? <NoForms />
+            : <YourFormsTable rows={ myForms } />
+        }
+      </Grid>
     );
   }
 }

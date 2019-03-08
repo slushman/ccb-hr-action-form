@@ -48,48 +48,45 @@ class YourFormsTable extends React.Component {
     const { page, rowsPerPage } = this.state;
     const emptyRows = rowsPerPage - Math.min( rowsPerPage, rows.length - page * rowsPerPage );
     return (
-      <Grid>
-        <Heading2>Your Forms</Heading2>
-        <WrappingPaper>
-          <TableWrap>
-            <Table>
-              <TableHead>
-                <TableHeadRow>
-                  <HeaderCell>Form Name</HeaderCell>
-                  <HeaderCell>Request Type</HeaderCell>
-                  <HeaderCell>Submission Date</HeaderCell>
-                  <HeaderCell>Form Status</HeaderCell>
-                </TableHeadRow>
-              </TableHead>
-              <TableBody>
-                {
-                  rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => (
-                    <YourFormsRow key={i} row={row} />
-                  ))
-                }
-                <EmptyRow emptyRows={emptyRows} />
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    ActionsComponent={TablePaginationActions}
-                    colSpan={5}
-                    count={rows.length}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    page={page}
-                    rowsPerPage={rowsPerPage}
-                    rowsPerPageOptions={[5,10,25]}
-                    SelectProps={{
-                      native: true,
-                    }}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </TableWrap>
-        </WrappingPaper>
-      </Grid>
+      <WrappingPaper>
+        <TableWrap>
+          <Table>
+            <TableHead>
+              <TableHeadRow>
+                <HeaderCell>Form Name</HeaderCell>
+                <HeaderCell>Request Type</HeaderCell>
+                <HeaderCell>Submission Date</HeaderCell>
+                <HeaderCell>Form Status</HeaderCell>
+              </TableHeadRow>
+            </TableHead>
+            <TableBody>
+              {
+                rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => (
+                  <YourFormsRow key={i} row={row} />
+                ))
+              }
+              <EmptyRow emptyRows={emptyRows} />
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  ActionsComponent={TablePaginationActions}
+                  colSpan={5}
+                  count={rows.length}
+                  onChangePage={this.handleChangePage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  page={page}
+                  rowsPerPage={rowsPerPage}
+                  rowsPerPageOptions={[5,10,25]}
+                  SelectProps={{
+                    native: true,
+                  }}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </TableWrap>
+      </WrappingPaper>
     );
   }
 }
