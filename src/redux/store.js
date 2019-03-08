@@ -12,7 +12,7 @@ export const reduxFBConfig = {
   userProfile: 'users',
 };
 
-const enhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose(
+const enhancers = ( window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() ) || compose(
   applyMiddleware(
     routerMiddleware( history )
   ),
