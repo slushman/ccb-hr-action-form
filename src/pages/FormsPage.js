@@ -25,15 +25,3 @@ class FormsPage extends React.Component {
 
 export default FormsPage;
 
-// const mapStateToProps = ( state ) => {
-//   return {
-//     authUser: state.firebase.auth,
-//   };
-// };
-
-// const enhance = compose(
-//   withFirebase,
-//   connect( mapStateToProps )
-// );
-
-// export default enhance( FormsPage );
