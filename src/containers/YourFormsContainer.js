@@ -2,6 +2,7 @@ import React from 'react';
 import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import * as R from 'ramda';
 
 import { convertToArrayWithFormId } from '../functions';
 import YourFormsTable from '../components/FormTables/YourFormsTable';
@@ -12,9 +13,10 @@ class YourFormsContainer extends React.Component {
       return null;
     }
     const formsArray = convertToArrayWithFormId( this.props.forms );
-    const myForms = formsArray.filter( ( form ) => {
-      return this.props.authUser.uid === form.submitterId;
-    } );
+
+    const isThisMyForm = (form) => this.props.authUser.uid === form.submitterId; // Does the submitterId match the current user id?
+    const myForms = R.filter( isThisMyForm, formsArray ); // Return just the matching forms
+
     return (
       <YourFormsTable
         rows={ myForms }

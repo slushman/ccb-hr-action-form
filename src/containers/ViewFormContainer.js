@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import * as R from 'ramda';
 
 import { convertToArrayWithFormId } from '../functions';
 import ViewForm from '../components/ViewForm/ViewForm';
@@ -15,10 +16,10 @@ class ViewFormContainer extends React.Component {
     const { forms, match } = this.props;
     const formId = match.params.formId;
     const formsArray = convertToArrayWithFormId( forms );
-    const form = formsArray.filter( ( form ) => {
-      return formId === form.formId;
-    } );
-    
+
+    const formIdsMatch = (form) => formId === form.formId; // Do the form ids match?
+    const form = R.filter( formIdsMatch, formsArray ); // Return just the matching form
+
     return (
       <ViewForm
         form={ form[0] }
