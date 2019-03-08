@@ -17,6 +17,10 @@ class YourFormsContainer extends React.Component {
     const isThisMyForm = (form) => this.props.authUser.uid === form.submitterId; // Does the submitterId match the current user id?
     const myForms = R.filter( isThisMyForm, formsArray ); // Return just the matching forms
 
+    if ( 0 === myForms.length ) {
+      return null;
+    }
+
     return (
       <YourFormsTable
         rows={ myForms }
