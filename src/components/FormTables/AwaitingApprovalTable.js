@@ -7,8 +7,6 @@ import EmptyRow from './EmptyRow';
 import AwaitingFormsRow from './AwaitingFormsRow';
 
 import {
-  Grid,
-  Heading2,
   HeaderCell,
   Table,
   TableBody,

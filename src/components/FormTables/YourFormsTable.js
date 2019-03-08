@@ -7,8 +7,6 @@ import EmptyRow from './EmptyRow';
 import YourFormsRow from './YourFormsRow';
 
 import {
-  Grid,
-  Heading2,
   HeaderCell,
   Table,
   TableBody,

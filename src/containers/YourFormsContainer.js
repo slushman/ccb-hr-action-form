@@ -10,7 +10,6 @@ import {
   Grid,
   Heading2,
   Paragraph,
-  WrappingPaper,
 } from '../styles';
 
 const NoForms = () => (
