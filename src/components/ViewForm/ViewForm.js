@@ -8,9 +8,10 @@ import { connect } from 'react-redux';
 
 import { fields } from '../../constants/fields';
 import { getStatus, waitingOnMe } from '../../functions';
-import ActionBanner from './ActionBanner';
+import FormActions from './FormActions';
 
 import {
+  Banner,
   Heading1,
   Heading2,
   HeaderCell,
@@ -61,7 +62,13 @@ class ViewForm extends React.Component {
     const isWaitingOnMe = waitingOnMe( form, authUser );
     this.setState( {
       data: fieldData,
-      waiting: isWaitingOnMe,
+    } );
+    this.setWaiting( isWaitingOnMe );
+  }
+
+  setWaiting = (waiting) => {
+    this.setState( {
+      waiting: waiting,
     } );
   }
 
@@ -74,7 +81,9 @@ class ViewForm extends React.Component {
       <React.Fragment>
         {
           this.state.waiting &&
-            <ActionBanner formInfo={ form } />
+            <Banner>
+              <FormActions formInfo={ form } setWaiting={ this.setWaiting } />
+            </Banner>
         }
         <Heading1>{ form.formName }</Heading1>
         <Paragraph>Submitted: { dayjs( form.dateSubmitted, 'YYYY-MM-DDTHH:mm' ).format( 'M/D/YYYY h:mm A' ) }</Paragraph>

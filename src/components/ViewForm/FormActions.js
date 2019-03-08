@@ -39,10 +39,11 @@ class FormActions extends React.Component {
 
   static propTypes = {
     formInfo: PropTypes.object.isRequired,
+    setWaiting: PropTypes.func,
   };
 
   handleApproval = () => {
-    const { firebase, formInfo } = this.props;
+    const { firebase, formInfo, setWaiting } = this.props;
     const docRef = firebase.firestore().collection('forms').doc(formInfo.formId);
     const responseUpdate = {};
     const responseType = getResponseType(this.props.authUser);
@@ -50,6 +51,9 @@ class FormActions extends React.Component {
     responseUpdate[`responses.${ responseType }.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
     docRef.update( responseUpdate )
     .then(() => {
+      if ( setWaiting ) {
+        setWaiting( false );
+      }
       setTimeout(() => {
         alert('Form approved!');
       }, 250)
@@ -57,7 +61,7 @@ class FormActions extends React.Component {
   }
 
   handleDenial = () => {
-    const { firebase, formInfo } = this.props;
+    const { firebase, formInfo, setWaiting } = this.props;
     const docRef = firebase.firestore().collection('forms').doc(formInfo.formId);
     const responseUpdate = {};
     const responseType = getResponseType(this.props.authUser);
@@ -65,6 +69,9 @@ class FormActions extends React.Component {
     responseUpdate[`responses.${ responseType }.dateResponse`] = dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' );
     docRef.update( responseUpdate )
     .then(() => {
+      if ( setWaiting ) {
+        setWaiting( false );
+      }
       setTimeout(() => {
         alert('Form denied!');
       }, 250)
