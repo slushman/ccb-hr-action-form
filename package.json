@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@firebase/app-types": "^0.3.5",
-=======
-    "@firebase/app-types": "^0.3.4",
->>>>>>> c984985f0efb3c9314076265786b0a88b1568cbe
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
     "@slack/client": "^4.8.0",
@@ -16,7 +12,7 @@
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
     "classnames": "^2.2.6",
-    "connected-react-router": "^6.3.1",
+    "connected-react-router": "^6.3.2",
     "dayjs": "^1.8.8",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
@@ -26,10 +22,7 @@
     "firebase-app": "^0.0.1",
     "firebase-auth": "^0.1.2",
     "formik": "^1.4.2",
-<<<<<<< HEAD
-=======
     "history": "^4.7.2",
->>>>>>> c984985f0efb3c9314076265786b0a88b1568cbe
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.7.0",
