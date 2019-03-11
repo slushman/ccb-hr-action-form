@@ -23,10 +23,32 @@ React app that allows leaders within CCB to post an HR action form.
 
 
 ## TODO
+* Setup chain logic for notifications
+* Add more options for responses based on the various forms
 * Change alerts to notification banner.
 * Send notification on form submission to Slack.
 * Get response from Slack, save to Firebase DB.
 * Send additional notifications to Slack based on previous Slack responses.
+
+
+
+## Chain Logic
+1) If HR has not approved, hide from everyone else
+2) If HR has approved, FIN is required response but has not responded, hide from everyone else
+3) If HR & FIN have approved, LT is a required response but has not responded, hide from everyone else
+4) If HR, FIN, and/or LT have approved, show to CEO
+
+
+## Notifications
+When a new form is submitted, notify HR
+When HR approves and FIN needs to respond, send FIN a notification
+When FIN approves, if the submitter is not LT, send the selected LT member a notification
+If submitter is LT & FIN approves, or LT approves, and CEO needs to respond, send CEO notification.
+If CEO approves, send submitter notification.
+
+If any responder denies, send the submitter a notification
+
+
 
 
 ## Responses
