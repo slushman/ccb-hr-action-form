@@ -1,7 +1,6 @@
 import functions from 'firebase-functions';
 import IncomingWebhook from '@slack/client';
 
-const url = '';
 const webhook = new IncomingWebhook();
 
 function sendMessage( message ) {
@@ -30,6 +29,6 @@ exports.updateForm = functions.firestore.document('forms/{formId}').onUpdate(eve
 	// If not do nothing.
 
 	sendMessage( message );
-	console.log( 'Approval added : ' JSON.stringify( newValue ) );
+	console.log( 'Approval added : ' + JSON.stringify( newValue ) );
 	return true;
 });
