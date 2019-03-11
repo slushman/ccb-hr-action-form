@@ -9,10 +9,10 @@ import {
 } from '../../styles';
 
 /**
- * Fields that appear if:
- * requestType is employment
+ * This field should appear:
+ * - when requestType is employment
  * and
- * employmentType is new-hire
+ * - when employmentType is new-hire
  */
 class NewHireFields extends React.Component {
   render() {

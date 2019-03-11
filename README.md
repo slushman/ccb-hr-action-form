@@ -1,3 +1,9 @@
+# Questions:
+If LT member submit form, does it need approval by another LT member?
+
+
+
+
 # HR Action Form
 React app that allows leaders within CCB to post an HR action form.
 
@@ -40,13 +46,16 @@ React app that allows leaders within CCB to post an HR action form.
 
 
 ## Notifications
+General rules:
+If any responder denies, send the submitter a notification
+
+Process (assuming all responders are needed):
 When a new form is submitted, notify HR
-When HR approves and FIN needs to respond, send FIN a notification
+When HR approves, send FIN a notification
 When FIN approves, if the submitter is not LT, send the selected LT member a notification
 If submitter is LT & FIN approves, or LT approves, and CEO needs to respond, send CEO notification.
 If CEO approves, send submitter notification.
 
-If any responder denies, send the submitter a notification
 
 
 

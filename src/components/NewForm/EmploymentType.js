@@ -2,8 +2,8 @@ import React from 'react';
 import Select from '../Fields/Select';
 
 /**
- * Field appears if:
- * requestType is employment
+ * This field should appear:
+ * - when requestType is employment
  */
 class EmploymentType extends React.Component {
   render() {

@@ -6,7 +6,6 @@ import RequestType from './RequestType';
 import NewHireFields from './NewHireFields';
 import EmploymentType from './EmploymentType';
 import AcquisitionType from './AcquisitionType';
-import Comments from './Comments';
 import ResignationTerminationFields from './ResignationTerminationFields';
 import RoleChangeFields from './RoleChangeFields';
 import TransferPromotionFields from './TransferPromotionFields';
@@ -16,7 +15,7 @@ import LeaveFields from './LeaveFields';
 import EffectiveDate from './EffectiveDate';
 import AssociateName from './AssociateName';
 import FormName from './FormName';
-import ApprovalFields from './ApprovalFields';
+import AllFormsFields from './AllFormsFields';
 
 import {
   Heading1,
@@ -114,12 +113,8 @@ class NewForm extends React.Component {
             <EffectiveDate {...this.props} />
         }
         {
-          '' !== values.requestType &&
-            <Comments {...this.props} />
-        }
-        {
-          '' !== values.requestType &&
-            <ApprovalFields values={values} />
+          '' !== this.props.values.requestType &&
+            <AllFormsFields values={values} />
         }
         <SubmitButton type="submit">Submit</SubmitButton>
       </StyledForm>

@@ -8,8 +8,8 @@ import {
 } from '../../styles';
 
 /**
- * Fields that appear if:
- * requestType is add-role
+ * These fields should appear:
+ * - when requestType is add-role
  */
 class AddRoleFields extends React.Component {
   render() {
