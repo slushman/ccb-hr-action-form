@@ -15,7 +15,8 @@ import LeaveFields from './LeaveFields';
 import EffectiveDate from './EffectiveDate';
 import AssociateName from './AssociateName';
 import FormName from './FormName';
-import AllFormsFields from './AllFormsFields';
+import ApprovalFields from './ApprovalFields';
+import Comments from './Comments';
 
 import {
   Heading1,
@@ -114,7 +115,10 @@ class NewForm extends React.Component {
         }
         {
           '' !== this.props.values.requestType &&
-            <AllFormsFields values={values} />
+            <React.Fragment>
+              <Comments values={values} />
+              <ApprovalFields values={values} />
+            </React.Fragment>
         }
         <SubmitButton type="submit">Submit</SubmitButton>
       </StyledForm>
