@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FastField, Form } from 'formik';
 import styled from 'styled-components';
 
@@ -18,10 +18,10 @@ import AssociateName from './AssociateName';
 import FormName from './FormName';
 import ApprovalFields from './ApprovalFields';
 
-import Button from '@material-ui/core/Button';
-
-const Heading1 = styled.h1``;
-Heading1.displayName = 'Heading1';
+import {
+  Heading1,
+  SubmitButton,
+} from '../../styles';
 
 const StyledForm = styled(Form)`
   margin: 0 auto;
@@ -29,11 +29,7 @@ const StyledForm = styled(Form)`
 `;
 StyledForm.displayName = 'StyledForm';
 
-/**
- * Unique ID generated in constructor so each page load generates a new one.
- * https://stackoverflow.com/questions/29420835/how-to-generate-unique-ids-for-form-labels-in-react
- */
-class NewForm extends Component {
+class NewForm extends React.Component {
   render() {
     const { values } = this.props;
     return (
@@ -125,11 +121,7 @@ class NewForm extends Component {
           '' !== values.requestType &&
             <ApprovalFields values={values} />
         }
-        <Button
-          color="primary"
-          type="submit"
-          variant="contained"
-        >Submit</Button>
+        <SubmitButton type="submit">Submit</SubmitButton>
       </StyledForm>
     );
   }

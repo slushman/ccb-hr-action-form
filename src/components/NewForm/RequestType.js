@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Select from '../Fields/Select';
 
-class RequestType extends Component {
+class RequestType extends React.Component {
   render() {
     return (
       <Select

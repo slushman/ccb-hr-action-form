@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import Input from '../Fields/Input';
 import Select from '../Fields/Select';
 import AssociateName from './AssociateName';
 
-const Fieldset = styled.fieldset`
-  margin-bottom: 1.5em;
-`;
-Fieldset.displayName = 'Fieldset';
-
-const Legend = styled.legend``;
-Legend.displayName = 'Legend';
+import {
+  Fieldset,
+  Legend,
+} from '../../styles';
 
 /**
  * Fields that appear if:
  * requestType is transfer-promotion
  */
-class TransferPromotionFields extends Component {
+class TransferPromotionFields extends React.Component {
   render() {
     return (
       <Fieldset>

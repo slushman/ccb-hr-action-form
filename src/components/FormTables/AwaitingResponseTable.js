@@ -4,12 +4,13 @@ import TablePagination from '@material-ui/core/TablePagination';
 
 import TablePaginationActions from './TablePaginationActions';
 import EmptyRow from './EmptyRow';
-import YourFormsRow from './YourFormsRow';
+import AwaitingFormsRow from './AwaitingFormsRow';
 
 import {
   HeaderCell,
   Table,
   TableBody,
+  TableCell,
   TableFooter,
   TableHead,
   TableHeadRow,
@@ -18,7 +19,7 @@ import {
   WrappingPaper,
 } from '../../styles';
 
-class YourFormsTable extends React.Component {
+class AwaitingResponseTable extends React.Component {
 
   static propTypes = {
     rows: PropTypes.array.isRequired,
@@ -51,34 +52,34 @@ class YourFormsTable extends React.Component {
           <Table>
             <TableHead>
               <TableHeadRow>
-                <HeaderCell>Form Name</HeaderCell>
-                <HeaderCell>Request Type</HeaderCell>
-                <HeaderCell>Submission Date</HeaderCell>
-                <HeaderCell>Form Status</HeaderCell>
+                <HeaderCell component="th">Form Name</HeaderCell>
+                <HeaderCell align="right" component="th">Request Type</HeaderCell>
+                <HeaderCell align="right" component="th">Submission Date</HeaderCell>
+                <TableCell align="right">Action</TableCell>
               </TableHeadRow>
             </TableHead>
             <TableBody>
               {
                 rows.slice( page * rowsPerPage, page * rowsPerPage + rowsPerPage ).map( ( row, i ) => (
-                  <YourFormsRow key={i} row={row} />
+                  <AwaitingFormsRow key={ i } row={ row } />
                 ))
               }
-              <EmptyRow emptyRows={emptyRows} />
+              <EmptyRow emptyRows={ emptyRows } />
             </TableBody>
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  ActionsComponent={TablePaginationActions}
-                  colSpan={5}
-                  count={rows.length}
-                  onChangePage={this.handleChangePage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                  page={page}
-                  rowsPerPage={rowsPerPage}
-                  rowsPerPageOptions={[5,10,25]}
-                  SelectProps={{
+                  ActionsComponent={ TablePaginationActions }
+                  colSpan={ 5 }
+                  count={ rows.length }
+                  onChangePage={ this.handleChangePage }
+                  onChangeRowsPerPage={ this.handleChangeRowsPerPage }
+                  page={ page }
+                  rowsPerPage={ rowsPerPage }
+                  rowsPerPageOptions={ [ 5,10,25 ] }
+                  SelectProps={ {
                     native: true,
-                  }}
+                  } }
                 />
               </TableRow>
             </TableFooter>
@@ -89,4 +90,4 @@ class YourFormsTable extends React.Component {
   }
 }
 
-export default YourFormsTable;
+export default AwaitingResponseTable;

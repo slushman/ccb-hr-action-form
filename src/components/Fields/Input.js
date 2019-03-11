@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FastField } from 'formik';
 import styled from 'styled-components';
@@ -23,10 +23,15 @@ const InputElement = styled(FastField)`
   margin-bottom: 1.5em;
   padding: 0.5rem;
   width: 100%;
+
+  &[readonly] {
+    background-color: #ddd;
+    color: #777;
+  }
 `;
 InputElement.displayName = 'InputElement';
 
-class Input extends Component {
+class Input extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     id: PropTypes.string,
@@ -35,6 +40,7 @@ class Input extends Component {
     handleBlur: PropTypes.func,
     handleChange: PropTypes.func,
     placeholder: PropTypes.string,
+    readOnly: PropTypes.bool,
     type: PropTypes.string,
     value: PropTypes.string,
   };
@@ -51,6 +57,7 @@ class Input extends Component {
       handleBlur,
       handleChange,
       placeholder,
+      readOnly,
       type,
       value,
     } = this.props;
@@ -64,6 +71,7 @@ class Input extends Component {
           onBlur={handleBlur}
           onChange={handleChange}
           placeholder={placeholder}
+          readOnly={ readOnly }
           type={type}
           value={value}
         />
