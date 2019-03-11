@@ -24,7 +24,6 @@ class StatusItem extends React.Component {
   }
 }
 
-
 const mapStateToProps = ( state ) => {
   return {
     firebase: state.firebase,
