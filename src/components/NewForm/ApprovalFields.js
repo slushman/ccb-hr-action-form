@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import * as R from 'ramda';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -41,13 +40,12 @@ const approvalOptions = [
  * - when requestType has a value - for all fields
  */
 class ApprovalFields extends React.Component {
-  static propTypes = {
-    values: PropTypes.object.isRequired,
-  };
-
   render() {
-    const removeMeFromOptions = (option) => this.props.authUser.email !== option.value; // Don't match the current user email.
-    let filteredOptions = R.filter( removeMeFromOptions, approvalOptions ); // Filter out the current user.
+    let filteredOptions = approvalOptions;
+    if ( this.props.authUser ) {
+      const removeMeFromOptions = (option) => this.props.authUser.email !== option.value; // Don't match the current user email.
+      filteredOptions = R.filter( removeMeFromOptions, approvalOptions ); // Filter out the current user.
+    }
 
     return (
       <Fieldset>
@@ -73,5 +71,7 @@ const enhance = compose(
   withFirebase,
   connect( mapStateToProps )
 );
+
+export const PureApprovalFields = ApprovalFields;
 
 export default enhance( ApprovalFields );

@@ -8,12 +8,8 @@ describe('<Comments/>', () => {
     const wrapper = factory();
     expect(wrapper.exists()).toBe(true);
 
-    // Textarea exists
-    const findTextarea = wrapper.find('Textarea');
-    expect(findTextarea.exists()).toBe(true);
-
-    // nameNewRole exists
-    const findComments = wrapper.find('[name="comments"]');
-    expect(findComments.exists()).toBe(true);
+    // Select exists
+    const findWrap = wrapper.find('Textarea');
+    expect(findWrap.exists()).toBe(true);
   });
 });
