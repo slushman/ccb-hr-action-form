@@ -1,96 +1,96 @@
-import React, { Component, Fragment } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { FastField } from 'formik';
+import * as R from 'ramda';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withFirebase } from 'react-redux-firebase';
+
 import Select from '../Fields/Select';
 
-const Fieldset = styled.fieldset`
-  margin-bottom: 1.5em;
-`;
-Fieldset.displayName = 'Fieldset';
+import {
+  Fieldset,
+  Legend,
+} from '../../styles';
+import * as EMAILS from '../../constants/emails';
 
-const Legend = styled.legend``;
-Legend.displayName = 'Legend';
+const approvalOptions = [
+  {
+    label: 'Aaron Senneff',
+    value: EMAILS.AARONSENNEFF,
+  },
+  {
+    label: 'Amanda Williams',
+    value: EMAILS.AMANDAWILLIAMS,
+  },
+  {
+    label: 'Heather Sharp',
+    value: EMAILS.HEATHERSHARP,
+  },
+  {
+    label: 'Jeff Otero',
+    value: EMAILS.JEFFOTERO,
+  },
+  {
+    label: 'Chris Wilcoxson',
+    value: 'cwilcoxson@gmail.com',
+  },
+];
 
 /**
  * Field group appears for all fields, if requestType has a value.
  */
-class ApprovalFields extends Component {
+class ApprovalFields extends React.Component {
   static propTypes = {
     values: PropTypes.object.isRequired,
   };
 
   render() {
-    const { values } = this.props;
+
+    const removeMeFromOptions = (option) => this.props.authUser.email !== option.value; // Don't match the current user email.
+    let filteredOptions = R.filter( removeMeFromOptions, approvalOptions ); // Filter out the current user.
+
     return (
       <Fieldset>
         <Legend>Approvals Needed</Legend>
-        <FastField
-          name="approvalsHR"
-          type="hidden"
-        />
-        { ( 'employment' === values.requestType ||
-          ( 'talent-acquisition' === values.requestType &&
-              'new-position' === values.acquisitionType ) ||
-            'add-role' === values.requestType ||
-            'leave' === values.requestType ) &&
-          <FastField
-            name="approvalsFinance"
-            type="hidden"
-          />
-        }
         <Select
           label="Leadership Team"
-          name="approvalsLT"
-          options={[
-            {
-              label: 'Aaron Senneff',
-              value: 'aaron-senneff',
-            },
-            {
-              label: 'Amanda Williams',
-              value: 'aamnda-williams',
-            },
-            {
-              label: 'Heather Sharp',
-              value: 'heather-sharp',
-            },
-            {
-              label: 'Jeff Otero',
-              value: 'jeff-otero',
-            },
-          ]}
+          name="responses.LT.contact"
+          options={ filteredOptions }
           placeholder="Select leadership team member"
         />
-        { ( ( 'talent-acquisition' === values.requestType &&
-             'new-position' === values.acquisitionType ) ||
-          'add-role' === values.requestType ||
-          'transfer-promotion' === values.requestType ) &&
-          <FastField
-            name="approvalsCEO"
-            type="hidden"
-          />
-        }
-        { ( 'employment' === values.requestType &&
+        {/* { ( 'employment' === values.requestType &&
             ( 'new-hire' === values.employmentType ||
               'rehire' === values.employmentType )
           ) &&
           (
-            <Fragment>
-              <FastField
+            <React.Fragment>
+              <Input
                 name="approvalsIT"
                 type="hidden"
+                value="jdonnellon@churchcommunitybuilder.com"
               />
-              <FastField
+              <Input
                 name="approvalsFacilities"
                 type="hidden"
+                value="jzabka@churchcommunitybuilder.com"
               />
-            </Fragment>
+            </React.Fragment>
           )
-        }
+        } */}
       </Fieldset>
     );
   }
 }
 
-export default ApprovalFields;
+const mapStateToProps = ( state ) => {
+  return {
+    authUser: state.firebase.auth,
+  };
+};
+
+const enhance = compose(
+  withFirebase,
+  connect( mapStateToProps )
+);
+
+export default enhance( ApprovalFields );

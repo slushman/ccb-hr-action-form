@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@firebase/app-types": "^0.3.5",
+=======
+    "@firebase/app-types": "^0.3.4",
+>>>>>>> c984985f0efb3c9314076265786b0a88b1568cbe
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
     "@slack/client": "^4.8.0",
@@ -12,6 +16,8 @@
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
     "classnames": "^2.2.6",
+    "connected-react-router": "^6.3.1",
+    "dayjs": "^1.8.8",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "fast-memoize": "^2.5.1",
@@ -19,28 +25,40 @@
     "firebase-admin": "^7.0.0",
     "firebase-app": "^0.0.1",
     "firebase-auth": "^0.1.2",
-    "firebase-functions": "^2.1.0",
     "formik": "^1.4.2",
+<<<<<<< HEAD
+=======
+    "history": "^4.7.2",
+>>>>>>> c984985f0efb3c9314076265786b0a88b1568cbe
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.7.0",
     "react-datepicker": "^2.0.0",
     "react-dom": "^16.7.0",
-    "react-formik-ui": "^0.3.3",
+    "react-google-button": "^0.5.3",
+    "react-redux": "^6.0.1",
+    "react-redux-firebase": "^3.0.0-alpha.10",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
     "react-select": "^2.2.0",
     "react-test-renderer": "^16.7.0",
     "recompose": "^0.30.0",
+    "redux": "^4.0.1",
+    "redux-auth-wrapper": "^2.1.0",
+    "redux-firestore": "^0.7.0",
+    "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^1.7.0",
     "styled-components": "^4.1.3",
-    "typescript": "^3.2.4",
+    "webpack-bundle-analyzer": "^3.1.0",
     "yup": "^0.26.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "npm run build -- --stats && webpack-bundle-analyzer build/bundle-stats.json"
   },
   "eslintConfig": {
     "extends": "react-app"

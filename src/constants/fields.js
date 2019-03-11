@@ -6,12 +6,6 @@ export const fields = [
 		displayOrder: 3,
 	},
 	{
-		key: 'approvals',
-		label: 'Approvals',
-		defaultValue: '',
-		displayOrder: 38,
-	},
-	{
 		key: 'comments',
 		label: 'Comments',
 		defaultValue: '',
@@ -48,6 +42,12 @@ export const fields = [
 		displayOrder: 11,
 	},
 	{
+		key: 'dateLeaveEffective',
+		label: 'Leave Effective Date',
+		defaultValue: '',
+		displayOrder: 33,
+	},
+	{
 		key: 'dateLeaveReturn',
 		label: 'Expected Return Date',
 		defaultValue: '',
@@ -56,6 +56,12 @@ export const fields = [
 	{
 		key: 'datePosted',
 		label: 'Date Posted',
+		defaultValue: '',
+		displayOrder: 17,
+	},
+	{
+		key: 'dateRequested',
+		label: 'Date Requested',
 		defaultValue: '',
 		displayOrder: 17,
 	},
@@ -100,18 +106,6 @@ export const fields = [
 		label: 'Form Name',
 		defaultValue: '',
 		displayOrder: null,
-	},
-	{
-		key: 'formStatus',
-		label: 'Form Status',
-		defaultValue: '',
-		displayOrder: 39,
-	},
-	{
-		key: 'formStatusBy',
-		label: 'Form Status Updated By',
-		defaultValue: '',
-		displayOrder: 40,
 	},
 	{
 		key: 'hiringLead',
@@ -189,6 +183,18 @@ export const fields = [
 		label: 'Role',
 		defaultValue: '',
 		displayOrder: 7,
+	},
+	{
+		key: 'roleNameNew',
+		label: 'New Role',
+		defaultValue: '',
+		displayOrder: 8,
+	},
+	{
+		key: 'roleNamePrevious',
+		label: 'Previous Role',
+		defaultValue: '',
+		displayOrder: 9,
 	},
 	{
 		key: 'salary',

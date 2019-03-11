@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Select from '../Fields/Select';
 
 /**
  * Field appears if:
  * requestType is employment
  */
-class EmploymentType extends Component {
+class EmploymentType extends React.Component {
   render() {
     return (
       <Select

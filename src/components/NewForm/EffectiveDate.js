@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Input from '../Fields/Input';
 
 /**
  * Appears for the following criteria:
  * If requestType is employment or leave or role-change or transfer-promotion
  */
-class EffectiveDate extends Component {
+class EffectiveDate extends React.Component {
   render() {
     return (
       <Input

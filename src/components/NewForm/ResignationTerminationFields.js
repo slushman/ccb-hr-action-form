@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import Input from '../Fields/Input';
 import Select from '../Fields/Select';
 
-const Fieldset = styled.fieldset`
-  margin-bottom: 1.5em;
-`;
-Fieldset.displayName = 'Fieldset';
-
-const Legend = styled.legend``;
-Legend.displayName = 'Legend';
+import {
+  Fieldset,
+  Legend,
+} from '../../styles';
 
 /**
  * Fields that appear if:
@@ -17,7 +13,7 @@ Legend.displayName = 'Legend';
  * and
  * employmentType is resignation or termination
  */
-class ResignationTerminationFields extends Component {
+class ResignationTerminationFields extends React.Component {
   render() {
     const { values } = this.props;
     return (

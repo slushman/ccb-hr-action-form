@@ -1,237 +1,162 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import styled, { ThemeProvider } from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import moment from 'moment';
+import { withFirestore } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 
-import NewForm from '../components/NewForm/NewForm';
-import { AuthUserContext } from '../components/Session';
-
+import { Main, Grid, Wrapper } from '../styles';
 import * as ROUTES from '../constants/routes';
-import { withFirebase } from '../components/Firebase';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import NewForm from '../components/NewForm/NewForm';
+import NavBar from '../components/Navigation/NavBar';
+import { validationSchema } from '../components/NewForm/validationSchema';
+import * as EMAILS from '../constants/emails';
 
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-});
+const getApprovalFields = ( values ) => {
 
-const Main = styled.main`
-  display: block;
-  margin-left: ${ props => props.theme.spacing.unit * 3 }px;
-  margin-right: ${ props => props.theme.spacing.unit * 3 }px;
-  margin-top: 4em;
-  width: auto;
-  
-  ${ theme.breakpoints.up( 400 + theme.spacing.unit * 3 * 2 ) }{
-    margin-left: auto;
-    margin-right: auto;
-    width: 48rem;
-  }
-`;
+  values.responses.LT.response = '';
+  values.responses.LT.dateResponse = '';
+  values.responses.HR = {};
+  values.responses.HR.contact = EMAILS.SONDRACALHOUN;
+  values.responses.HR.response = '';
+  values.responses.HR.dateResponse = '';
 
-const WrappingPaper = styled(Paper)`
-  padding: ${ props => props.theme.spacing.unit * 3}px;
-`;
-
-const validationSchema = Yup.object().shape({
-  comments: Yup.string(),
-  dateBirth: Yup.date().default(function(){
-    return new Date();
-  }),
-  dateClosed: Yup.date().default(function(){
-    return new Date();
-  }),
-  dateEffective: Yup.date().default(function(){
-    return new Date();
-  }),
-  dateFilled: Yup.date().default(function(){
-    return new Date();
-  }),
-  dateHire: Yup.date().default(function(){
-    return new Date();
-  }),
-  dateLeaveReturn: Yup.date().default(function(){
-    return new Date();
-  }),
-  datePosted: Yup.date().default(function(){
-    return new Date();
-  }),
-  dateRequested: Yup.date().default(function(){
-    return new Date();
-  }),
-  formName: Yup.string(),
-  hiringLead: Yup.string(),
-  leavePtoHours: Yup.string(),
-  nameAssociate: Yup.string(),
-  nameNewRole: Yup.string(),
-  newRate: Yup.string(),
-  notRehirable: Yup.string(),
-  numberOfDays: Yup.number(),
-  otherExplanation: Yup.string(),
-  role: Yup.string(),
-  namePreviousRole: Yup.string(),
-  salary: Yup.string(),
-  salaryNew: Yup.string(),
-  salaryPrevious: Yup.string(),
-  submitterId: Yup.string(),
-  team: Yup.string(),
-  teamLead: Yup.string(),
-  teamLeadNew: Yup.string(),
-  teamLeadPrevious: Yup.string(),
-});
-
-class NewFormPageComp extends Component {
-
-  componentDidMount() {
-    this.props.setTitle('New HR Action Form');
+  if ( 
+    'employment' === values.requestType
+    ||
+    (
+      'talent-acquisition' === values.requestType
+      && 'new-position' === values.acquisitionType
+    )
+    || 'add-role' === values.requestType
+    || 'leave' === values.requestType
+  ) {
+    values.responses.FIN = {};
+    values.responses.FIN.contact = EMAILS.FINANCE;
+    values.responses.FIN.response = '';
+    values.responses.FIN.dateResponse = '';
   }
 
-  createApprovalsObj = (values) => {
-    const approvals = {};
-
-    approvals.lt = values.approvalsLT;
-
-    if ( values.approvalsHR ) {
-      approvals.hr = values.approvalsHR;
-      delete values.approvalsHR;
-    }
-
-    if ( values.approvalsFinance ) {
-      approvals.finance = values.approvalsFinance;
-      delete values.approvalsFinance;
-    }
-
-    if ( values.approvalsCEO ) {
-      approvals.ceo = values.approvalsCEO;
-      delete values.approvalsCEO;
-    }
-
-    if ( values.approvalsIT ) {
-      approvals.it = values.approvalsIT;
-      delete values.approvalsIT;
-    }
-
-    if ( values.approvalsFacilities ) {
-      approvals.facilities = values.approvalsFacilities;
-      delete values.approvalsFacilities;
-    }
-
-    return { approvals, values };
+  if ( 
+    (
+      'talent-acquisition' === values.requestType
+      && 'new-position' === values.acquisitionType
+    ) 
+    || 'add-role' === values.requestType
+    || 'transfer-promotion' === values.requestType
+  ) {
+    values.responses.CEO = {};
+    values.responses.CEO.contact = EMAILS.DONHARMS;
+    values.responses.CEO.response = '';
+    values.responses.CEO.dateResponse = '';
   }
+
+  return values;
+}
+
+class NewFormPage extends React.Component {
+
+  handleSubmit = (values, { setSubmitting } ) => {
+
+    const newValues = getApprovalFields( values );
+
+    console.log( newValues );
+    this.props.firebase.firestore().collection('forms').add(
+      {
+        ...newValues,
+        dateSubmitted: dayjs( new Date() ).format( 'YYYY-MM-DDTHH:mm:ss' ),
+      }
+    )
+    .then(() => {
+      this.props.history.push( ROUTES.FORMS );
+      setTimeout(() => {
+        alert('Form submitted!');
+        setSubmitting(false);
+      }, 250)
+    })
+  };
 
   render() {
-    const { firebase } = this.props;
+    console.log( this.props );
     return (
-      <AuthUserContext.Consumer>
-        {
-          authUser => (
-            <ThemeProvider theme={theme}>
-              <Main>
-                <CssBaseline />
-                <Grid item xs={ 12 }>
-                  <WrappingPaper>
-                    <Formik
-                      initialValues={{
-                        acquisitionType: '',
-                        approvalsCEO: 'don-harms',
-                        approvalsFacilities: 'john-zabka',
-                        approvalsFinance: 'someone?',
-                        approvalsHR: 'sondra-calhoun',
-                        approvalsIT: 'joe-donnellon',
-                        approvalsLT: '',
-                        comments: '',
-                        dateBirth: '',
-                        dateClosed: '',
-                        dateEffective: '',
-                        dateFilled: '',
-                        dateHire: '',
-                        dateLeaveReturn: '',
-                        datePosted: '',
-                        dateRequested: '',
-                        employmentType: '',
-                        flsaClassification: '',
-                        flsaClassificationNewRole: '',
-                        flsaClassificationPrevious: '',
-                        formName: '',
-                        hiringLead: '',
-                        leavePtoHours: '',
-                        leaveType: '',
-                        nameAssociate: '',
-                        nameNewRole: '',
-                        newRate: '',
-                        notRehirable: '',
-                        numberOfDays: '',
-                        otherExplanation: '',
-                        rehireEligibility: '',
-                        requestType: '',
-                        role: '',
-                        namePreviousRole: '',
-                        salary: '',
-                        salaryNew: '',
-                        salaryPrevious: '',
-                        status: '',
-                        statusNewRole: '',
-                        submitterId: authUser.uid,
-                        team: '',
-                        teamLead: '',
-                        teamLeadNew: '',
-                        teamLeadPrevious: '',
-                      }}
-                      onSubmit={(values, {setSubmitting}) => {
-                        console.log(values);
-                        const { approvals, newValues } = this.createApprovalsObj(values);
-                        firebase.db.collection('forms')
-                          .add(
-                            {
-                              ...newValues,
-                              dateSubmitted: moment(new Date()).format('YYYY-MM-DDTHH:mm:ss'),
-                              approvals: approvals,
-                            }
-                          )
-                          .then(() => {
-                            this.props.history.push(ROUTES.FORMS);
-                            setTimeout(() => {
-                              alert('Form submitted!');
-                              setSubmitting(false);
-                            }, 250)
-                          })
-                          .catch( function ( error ) {
-                            console.error( 'Error adding document: ', error);
-                          })
-                        
-                        
-                      }}
-                      validationSchema={validationSchema}
-                    >
-                      {
-                        props => {
-                          return (
-                            <NewForm {...props} />
-                          );
-                        }
-                      }
-                    </Formik>
-                  </WrappingPaper>
-                </Grid>
-              </Main>
-            </ThemeProvider>
-          )
-        }
-      </AuthUserContext.Consumer>
+      <Main>
+        <Grid>
+          <Wrapper>
+            <NavBar pageTitle={ 'New HR Action Form' } />
+            <Formik
+              initialValues={
+                {
+                  acquisitionType: '',
+                  comments: '',
+                  dateBirth: '',
+                  dateClosed: '',
+                  dateEffective: '',
+                  dateFilled: '',
+                  dateHire: '',
+                  dateLeaveReturn: '',
+                  datePosted: '',
+                  dateRequested: '',
+                  employmentType: '',
+                  flsaClassification: '',
+                  flsaClassificationNewRole: '',
+                  flsaClassificationPrevious: '',
+                  formName: '',
+                  hiringLead: '',
+                  leavePtoHours: '',
+                  leaveType: '',
+                  nameAssociate: '',
+                  nameNewRole: '',
+                  newRate: '',
+                  notRehirable: '',
+                  numberOfDays: '',
+                  otherExplanation: '',
+                  rehireEligibility: '',
+                  requestType: '',
+                  role: '',
+                  namePreviousRole: '',
+                  salary: '',
+                  salaryNew: '',
+                  salaryPrevious: '',
+                  status: '',
+                  statusNewRole: '',
+                  submitterId: this.props.authUser.uid,
+                  team: '',
+                  teamLead: '',
+                  teamLeadNew: '',
+                  teamLeadPrevious: '',
+                }
+              }
+
+              onSubmit={ this.handleSubmit }
+              validationSchema={ validationSchema }
+            >
+              {
+                props => {
+                  return (
+                    <NewForm { ...props } />
+                  );
+                }
+              }
+            </Formik>
+          </Wrapper>
+        </Grid>
+      </Main>
     );
   }
 }
 
-const NewFormPage = compose(
-  withRouter,
-  withFirebase,
-)( NewFormPageComp );
+const mapStateToProps = ( state ) => {
+  return {
+    authUser: state.firebase.auth,
+    firestore: state.firestore,
+  };
+};
 
-export { NewFormPage, NewFormPageComp };
+const enhance = compose(
+  withFirestore,
+  withRouter,
+  connect( mapStateToProps )
+);
+
+export default enhance( NewFormPage );

@@ -1,17 +1,11 @@
-import React, { Component }  from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import Input from '../Fields/Input';
 import Select from '../Fields/Select';
-import AssociateName from './AssociateName';
-import EffectiveDate from '';
 
-const Fieldset = styled.fieldset`
-  margin-bottom: 1.5em;
-`;
-Fieldset.displayName = 'Fieldset';
-
-const Legend = styled.legend``;
-Legend.displayName = 'Legend';
+import {
+  Fieldset,
+  Legend,
+} from '../../styles';
 
 /**
  * Fields that appear if:
@@ -19,7 +13,7 @@ Legend.displayName = 'Legend';
  * and
  * acquisitionType is fill-position
  */
-class FillPositionFields extends Component {
+class FillPositionFields extends React.Component {
   render() {
     return (
       <Fieldset>

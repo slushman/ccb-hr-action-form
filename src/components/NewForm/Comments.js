@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Textarea from '../Fields/Textarea';
 
 /**
  * Field appears if:
  * requestType is not empty.
  */
-class Comments extends Component {
+class Comments extends React.Component {
   render() {
     return (
       <Textarea
